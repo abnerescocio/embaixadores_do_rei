@@ -1,0 +1,165 @@
+---
+titulo: Biografia de Jesus — Parte 1: Nascimento e Infância
+disciplina: Biografia de Jesus
+estudo: estudos/bj/01-nascimento-infancia.md
+---
+
+[ME] Como João chama Jesus no início do seu Evangelho?
+a) O Cordeiro
+b) A Videira
+c) O Verbo
+d) O Pastor
+R: c
+F: João 1.1
+
+[ME] Quantas gerações há entre Abraão e Davi, segundo Mateus 1.17?
+a) Sete
+b) Catorze
+c) Doze
+d) Quarenta e duas
+R: b
+F: Mateus 1.17
+
+[ME] Qual era a profissão de Zacarias?
+a) Escriba
+b) Levita
+c) Pescador
+d) Sacerdote
+R: d
+F: Lucas 1.5
+
+[ME] Qual o nome do anjo que falou com Zacarias?
+a) Gabriel
+b) Miguel
+c) Rafael
+d) Uriel
+R: a
+F: Lucas 1.19
+
+[ME] A que cidade Gabriel foi enviado para falar com Maria?
+a) Nazaré
+b) Belém
+c) Jerusalém
+d) Cafarnaum
+R: a
+F: Lucas 1.26
+
+[ME] O que Maria respondeu ao anjo?
+a) "Como saberei isto?"
+b) "Não sou digna de tamanha honra."
+c) "Eis aqui a serva do Senhor; cumpra-se em mim segundo a tua palavra."
+d) "Que farei, Senhor?"
+R: c
+F: Lucas 1.38
+
+[ME] O que significa "Emanuel"?
+a) Deus salva
+b) Príncipe da paz
+c) Deus é rei
+d) Deus conosco
+R: d
+F: Mateus 1.23
+
+[ME] Qual imperador mandou fazer o alistamento?
+a) Tibério César
+b) César Augusto
+c) Herodes
+d) Quirino
+R: b
+F: Lucas 2.1
+
+[ME] Onde Jesus foi deitado ao nascer?
+a) Num berço
+b) Numa manjedoura
+c) Numa estalagem
+d) Numa gruta
+R: b
+F: Lucas 2.7
+
+[ME] Quem recebeu primeiro o anúncio do nascimento de Jesus?
+a) Os magos
+b) Os sacerdotes
+c) Os escribas
+d) Os pastores
+R: d
+F: Lucas 2.8-9
+
+[ME] Que três títulos o anjo deu a Jesus?
+a) Rei, Profeta e Sacerdote
+b) Mestre, Senhor e Rei
+c) Salvador, Cristo e Senhor
+d) Messias, Emanuel e Jesus
+R: c
+F: Lucas 2.11
+
+[ME] Em que dia Jesus foi circuncidado?
+a) No oitavo dia
+b) No primeiro dia
+c) No terceiro dia
+d) No quadragésimo dia
+R: a
+F: Lucas 2.21
+
+[ME] Que oferta José e Maria levaram ao templo?
+a) Um par de rolas ou dois pombinhos
+b) Um cordeiro
+c) Dois bois
+d) Ouro e incenso
+R: a
+F: Lucas 2.24
+
+[ME] Quem era o homem justo que esperava a consolação de Israel, em Jerusalém?
+a) Zacarias
+b) José
+c) Natanael
+d) Simeão
+R: d
+F: Lucas 2.25
+
+[ME] Quem era a profetisa que estava no templo?
+a) Isabel
+b) Ana
+c) Maria
+d) Joana
+R: b
+F: Lucas 2.36
+
+[ME] Que presentes os magos deram a Jesus?
+a) Ouro, prata e mirra
+b) Incenso, nardo e mirra
+c) Ouro, incenso e mirra
+d) Ouro, incenso e aloés
+R: c
+F: Mateus 2.11
+
+[ME] Para onde o anjo mandou José fugir com o menino?
+a) Para Samaria
+b) Para a Síria
+c) Para a Babilônia
+d) Para o Egito
+R: d
+F: Mateus 2.13
+
+[ME] Por que José não foi morar na Judeia na volta do Egito?
+a) Porque Pilatos governava
+b) Porque Arquelau reinava ali
+c) Porque Herodes ainda vivia
+d) Por causa da fome
+R: b
+F: Mateus 2.22
+
+[ME] Quantos anos Jesus tinha na viagem em que ficou em Jerusalém depois da Páscoa?
+a) Doze anos
+b) Oito anos
+c) Dez anos
+d) Quatorze anos
+R: a
+F: Lucas 2.42
+
+[ME] Onde os pais acharam Jesus, três dias depois?
+a) Na casa de Isabel
+b) Na estalagem
+c) No templo, no meio dos doutores
+d) Na sinagoga de Nazaré
+R: c
+F: Lucas 2.46

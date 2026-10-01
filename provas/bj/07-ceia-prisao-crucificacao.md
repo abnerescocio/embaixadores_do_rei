@@ -1,0 +1,165 @@
+---
+titulo: Biografia de Jesus — Parte 7: Ceia, Prisão e Crucificação
+disciplina: Biografia de Jesus
+estudo: estudos/bj/07-ceia-prisao-crucificacao.md
+---
+
+[ME] Quanto os sacerdotes pagaram a Judas?
+a) Quarenta moedas de ouro
+b) Vinte moedas de prata
+c) Cem moedas de prata
+d) Trinta moedas de prata
+R: d
+F: Mateus 26.15
+
+[ME] Quem Jesus mandou preparar a Páscoa?
+a) Tiago e João
+b) André e Filipe
+c) Pedro e André
+d) Pedro e João
+R: d
+F: Lucas 22.8
+
+[ME] O que Jesus fez durante a ceia, em João 13?
+a) Ungiu a cabeça dos discípulos
+b) Lavou os pés dos discípulos
+c) Partiu o pão com os pobres
+d) Lavou as mãos de Pedro
+R: b
+F: João 13.4-5
+
+[ME] O que Pedro disse quando Jesus foi lavar-lhe os pés?
+a) "Nunca me lavarás os pés."
+b) "Lava-me também a cabeça."
+c) "Senhor, não sou digno."
+d) "Faze como quiseres."
+R: a
+F: João 13.8
+
+[ME] Como Jesus indicou o traidor, segundo João?
+a) Apontou Judas com o dedo
+b) Disse o nome de Judas
+c) Deu o bocado molhado a Judas
+d) Lavou primeiro os pés de Judas
+R: c
+F: João 13.26
+
+[ME] O que Jesus disse ao dar o cálice, em Mateus?
+a) "Este é o cálice da antiga aliança."
+b) "Bebei, pois sou a videira."
+c) "Isto é o meu sangue, o sangue do novo testamento."
+d) "Este vinho é para a Páscoa."
+R: c
+F: Mateus 26.27-28
+
+[ME] Qual é o novo mandamento que Jesus deu?
+a) Que guardemos o sábado
+b) Que nos amemos uns aos outros, como ele nos amou
+c) Que perdoemos setenta vezes sete
+d) Que lavemos os pés uns dos outros
+R: b
+F: João 13.34
+
+[ME] O que Jesus disse que aconteceria a Pedro naquela noite?
+a) Que fugiria para a Galileia
+b) Que seria preso com ele
+c) Que o trairia por dinheiro
+d) Que o negaria três vezes antes de o galo cantar
+R: d
+F: Mateus 26.34
+
+[ME] O que Jesus disse a Tomé em João 14.6?
+a) "Eu sou o caminho, e a verdade e a vida."
+b) "Eu sou a porta das ovelhas."
+c) "Eu sou a ressurreição e a vida."
+d) "Eu sou a videira verdadeira."
+R: a
+F: João 14.6
+
+[ME] Quem o Pai enviaria para ficar com os discípulos?
+a) Um anjo da guarda
+b) O Consolador, o Espírito de verdade
+c) O profeta Elias
+d) Um novo mestre
+R: b
+F: João 14.16-17
+
+[ME] O que Jesus disse ser em João 15.1?
+a) O bom pastor
+b) O pão da vida
+c) A porta das ovelhas
+d) A videira verdadeira
+R: d
+F: João 15.1
+
+[ME] Como se chamava o lugar onde Jesus foi orar antes de ser preso?
+a) Betfagé
+b) Betânia
+c) Getsêmani
+d) Cedrom
+R: c
+F: Mateus 26.36
+
+[ME] O que Jesus disse aos discípulos que dormiam no Getsêmani?
+a) "Vigiai e orai, para que não entreis em tentação."
+b) "Levantai-vos e fugi."
+c) "Voltai para a Galileia."
+d) "Ficai e esperai o galo cantar."
+R: a
+F: Mateus 26.41
+
+[ME] Qual foi o sinal que Judas deu para a prisão de Jesus?
+a) Um beijo
+b) Um abraço
+c) Um aceno de mão
+d) Uma saudação em voz alta
+R: a
+F: Mateus 26.48
+
+[ME] Como se chamava o servo do sumo sacerdote que Pedro feriu?
+a) Caifás
+b) Anás
+c) Barrabás
+d) Malco
+R: d
+F: João 18.10
+
+[ME] O que Jesus respondeu a Pilatos sobre o seu reino?
+a) "O meu reino é de Davi."
+b) "O meu reino não é deste mundo."
+c) "O meu reino é eterno e visível."
+d) "O meu reino pertence a César."
+R: b
+F: João 18.36
+
+[ME] Qual preso Pilatos soltou, atendendo ao pedido do povo?
+a) Simão Cireneu
+b) Nicodemos
+c) Barrabás
+d) José de Arimateia
+R: c
+F: Mateus 27.16-21
+
+[ME] Quem foi obrigado a levar a cruz de Jesus?
+a) José de Arimateia
+b) Nicodemos
+c) Simão, de Cirene
+d) Pedro
+R: c
+F: Mateus 27.32
+
+[ME] O que Jesus disse sobre os que o crucificaram?
+a) "Pai, perdoa-lhes, porque não sabem o que fazem."
+b) "Pai, castiga os meus inimigos."
+c) "Pai, afasta de mim este cálice."
+d) "Pai, em tuas mãos entrego o meu espírito."
+R: a
+F: Lucas 23.34
+
+[ME] O que aconteceu com o véu do templo quando Jesus morreu?
+a) Pegou fogo
+b) Rasgou-se em dois, de alto a baixo
+c) Caiu no chão
+d) Escureceu
+R: b
+F: Mateus 27.51

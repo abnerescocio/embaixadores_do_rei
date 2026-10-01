@@ -1,0 +1,165 @@
+---
+titulo: Biografia de Jesus — Parte 2: Preparação e Início do Ministério
+disciplina: Biografia de Jesus
+estudo: estudos/bj/02-preparacao-inicio-ministerio.md
+---
+
+[ME] Onde João Batista pregava?
+a) Em Jerusalém
+b) Em Nazaré
+c) À beira do mar da Galileia
+d) No deserto da Judeia
+R: d
+F: Mateus 3.1
+
+[ME] Qual era a mensagem de João Batista?
+a) "Preparai-vos para a guerra."
+b) "Guardai o sábado."
+c) "Arrependei-vos, porque é chegado o reino dos céus."
+d) "Pagai o tributo a César."
+R: c
+F: Mateus 3.2
+
+[ME] Do que João Batista se alimentava?
+a) Gafanhotos e mel silvestre
+b) Pão e peixe
+c) Figos e tâmaras
+d) Maná e codornizes
+R: a
+F: Mateus 3.4; Marcos 1.6
+
+[ME] Em que rio João batizava?
+a) No rio Cedrom
+b) No rio Jordão
+c) No rio Eufrates
+d) No mar da Galileia
+R: b
+F: Mateus 3.6
+
+[ME] Com o que Jesus batizaria, segundo João?
+a) Com água e sal
+b) Com o Espírito Santo e com fogo
+c) Com óleo
+d) Com sangue
+R: b
+F: Mateus 3.11
+
+[ME] O que Jesus respondeu a João, que não queria batizá-lo?
+a) "Faze o que te mando."
+b) "Eu sou maior do que tu."
+c) "Batiza-me no Espírito."
+d) "Deixa por agora, porque assim nos convém cumprir toda a justiça."
+R: d
+F: Mateus 3.15
+
+[ME] O que desceu sobre Jesus ao sair da água do batismo?
+a) O Espírito de Deus, como pomba
+b) Uma coluna de fogo
+c) Uma nuvem luminosa
+d) Um anjo
+R: a
+F: Mateus 3.16; Marcos 1.10
+
+[ME] Quanto tempo Jesus jejuou no deserto?
+a) Sete dias
+b) Três dias e três noites
+c) Quarenta dias e quarenta noites
+d) Vinte e um dias
+R: c
+F: Mateus 4.2
+
+[ME] Qual foi a primeira tentação?
+a) Lançar-se do pináculo do templo
+b) Adorar o diabo
+c) Transformar pedras em pães
+d) Tornar-se rei de Israel
+R: c
+F: Mateus 4.3
+
+[ME] O que Jesus respondeu à terceira tentação?
+a) "Ao Senhor teu Deus adorarás, e só a ele servirás."
+b) "Não tentarás o Senhor teu Deus."
+c) "Nem só de pão viverá o homem."
+d) "Honra a teu pai e a tua mãe."
+R: a
+F: Mateus 4.10
+
+[ME] Como João Batista chamou Jesus ao vê-lo?
+a) "Eis o Leão de Judá."
+b) "Eis o Bom Pastor."
+c) "Eis o Pão da Vida."
+d) "Eis o Cordeiro de Deus, que tira o pecado do mundo."
+R: d
+F: João 1.29
+
+[ME] Que nome Jesus deu a Simão?
+a) Boanerges
+b) Cefas (Pedro)
+c) Dídimo
+d) Tadeu
+R: b
+F: João 1.42
+
+[ME] O que Natanael disse sobre Nazaré?
+a) "Nazaré é cidade de profetas."
+b) "Pode vir alguma coisa boa de Nazaré?"
+c) "De Nazaré virá o Cristo."
+d) "Nazaré é a cidade de Davi."
+R: b
+F: João 1.46
+
+[ME] Onde Jesus fez o seu primeiro sinal?
+a) Em Caná da Galileia
+b) Em Cafarnaum
+c) Em Betânia
+d) Em Jericó
+R: a
+F: João 2.1, 11
+
+[ME] O que aconteceu com a água das seis talhas de pedra?
+a) Foi derramada
+b) Ficou fria e pura
+c) Virou vinho
+d) Virou azeite
+R: c
+F: João 2.9
+
+[ME] O que Jesus fez ao encontrar vendedores no templo?
+a) Pediu que os soldados os prendessem
+b) Chamou os sacerdotes
+c) Foi embora sem dizer nada
+d) Fez um azorrague de cordéis e os expulsou
+R: d
+F: João 2.15
+
+[ME] Quem foi ter com Jesus de noite?
+a) Nicodemos
+b) José de Arimateia
+c) Zaqueu
+d) Natanael
+R: a
+F: João 3.2
+
+[ME] O que Jesus disse a Nicodemos ser necessário para ver o reino de Deus?
+a) Guardar o sábado
+b) Pagar o dízimo
+c) Nascer de novo
+d) Ser circuncidado
+R: c
+F: João 3.3
+
+[ME] O que João Batista disse sobre Jesus e ele mesmo?
+a) "Ele é menor do que eu."
+b) "É necessário que ele cresça e que eu diminua."
+c) "Seguirei com ele até o fim."
+d) "Nós dois cresceremos juntos."
+R: b
+F: João 3.30
+
+[ME] Onde Jesus se assentou ao encontrar a mulher samaritana?
+a) No templo de Jerusalém
+b) Na sinagoga de Cafarnaum
+c) À beira do mar da Galileia
+d) Junto à fonte (poço) de Jacó
+R: d
+F: João 4.6
