@@ -18,14 +18,14 @@ docs/ (fontes)  ->  estudos/*.md  ->  saida/*-estudo.pdf
 - A prova nasce do **estudo**, não das fontes. A prova é **sempre só de marcar (múltipla escolha A–D)** e termina com um cartão-resposta de bolinhas; o gabarito é o espelho exato da prova com as respostas marcadas.
 - **Estudo:** 2 colunas, fonte 11pt, quantas páginas precisar. **Prova e gabarito:** impressão frente e verso, sempre 2 páginas em 2 colunas (fonte automática, até 10pt); sempre 20 questões; página 1 = questões, página 2 = cartão-resposta.
 - **Referências obrigatórias:** toda pergunta do estudo e toda questão da prova tem `F:` (obra/capítulo/página ou livro bíblico/capítulo/versículo). Aparecem ao lado do enunciado, no estudo e no gabarito (nunca na prova do aluno).
-- `saida/` é gerado; não editar à mão. Estrutura: `saida/<disciplina>/<unidade>/NNN_<unidade>-<estudo|prova|gabarito>.pdf` (NNN = próximo número livre **por tipo** na pasta; nunca sobrescreve; prova e gabarito da mesma geração dividem o número; número e data de geração também aparecem dentro do PDF).
+- `saida/` é gerado; não editar à mão. Estrutura: `saida/<disciplina>/<unidade>/`. O **estudo é canônico**: `<unidade>-estudo.pdf`, nome fixo, sobrescrito ao regerar (futuramente terá controle de versão e data de alteração dentro do material). Prova e gabarito: `NNN_<unidade>-<prova|gabarito>.pdf`, NNN = próximo número livre **por tipo** na pasta, nunca sobrescreve, e prova e gabarito da mesma geração dividem o número; o número e a data de geração também aparecem dentro do PDF.
 
 ## Fluxo de qualidade
 
 1. O Claude escreve o estudo (`status: rascunho`).
 2. Uma pessoa revisa fatos e referências contra a fonte e troca para `status: revisado`.
 3. Provas e gabaritos nascem do estudo; o script valida que cada `F:` da prova existe no estudo.
-4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (a numeração NNN_ guarda as versões).
+4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (o PDF do estudo é sobrescrito; os de prova guardam as versões pela numeração NNN_).
 
 ## Material de estudo
 

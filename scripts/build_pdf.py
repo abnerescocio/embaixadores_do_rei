@@ -5,11 +5,11 @@ Uso:
     python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md
     python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md
 
-Saída (saida/<disciplina>/<unidade>/, prefixo NNN_ sequencial por tipo, nunca sobrescreve):
-    estudo -> saida/cgo/escudeiro/001_escudeiro-estudo.pdf
-    prova  -> saida/cgo/escudeiro/001_escudeiro-prova.pdf
+Saída (saida/<disciplina>/<unidade>/):
+    estudo -> saida/cgo/escudeiro/escudeiro-estudo.pdf   (canônico: nome fixo, sobrescrito ao regerar)
+    prova  -> saida/cgo/escudeiro/001_escudeiro-prova.pdf (prefixo NNN_ sequencial, nunca sobrescreve)
               saida/cgo/escudeiro/001_escudeiro-gabarito.pdf
-O número e a data de geração também aparecem dentro do PDF (subtítulo e rodapé).
+A data de geração aparece dentro do PDF; na prova também o número (subtítulo e rodapé).
 
 Estudo: 2 colunas, fonte fixa (FONTE_ESTUDO), quantas páginas forem necessárias.
 Prova e gabarito: impressão frente e verso, sempre 2 páginas em 2 colunas; o script escolhe a
@@ -353,14 +353,18 @@ def main():
     meta, linhas = ler_md(entrada)
     nome = entrada.stem
     pasta = SAIDA / entrada.parent.name / nome
-    num = proximo_numero(pasta, modo)
-    meta["rotulo"] = f"nº {num} · {date.today().strftime('%d/%m/%Y')}"
+    hoje = date.today().strftime('%d/%m/%Y')
+    if modo == "estudo":
+        meta["rotulo"] = hoje  # o estudo é canônico: sem número de geração
+    else:
+        num = proximo_numero(pasta, modo)
+        meta["rotulo"] = f"nº {num} · {hoje}"
     if modo == "estudo":
         if meta.get("status") != "revisado":
             print(f"⚠ Estudo ainda não revisado (status: {meta.get('status', 'sem status')}).")
         secoes = parse_estudo(linhas)
         typ = typ_estudo(meta, secoes, FONTE_ESTUDO)
-        compilar(typ, pasta / f"{num}_{nome}-estudo.pdf")
+        compilar(typ, pasta / f"{nome}-estudo.pdf")
         print(f"  {contar_perguntas(secoes)} perguntas · {contar_paginas(typ)} páginas · "
               f"fonte {FONTE_ESTUDO}pt")
     else:
