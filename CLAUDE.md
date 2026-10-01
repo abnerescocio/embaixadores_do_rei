@@ -44,6 +44,9 @@ Nome da unidade (arquivo em `estudos/` e `provas/`) = slug curto: `escudeiro`, `
 
 ## Status
 
-- Piloto pronto: CGO / Escudeiro (`estudos/cgo/escudeiro.md`, `provas/cgo/escudeiro.md`).
+- CGO: Escudeiro e Arauto prontos (`estudos/cgo/`, `provas/cgo/`). No Arauto, a fonte não marca página nas Tarefas 1 e 2 e na Introdução, então essas referências ficam sem página.
 - BJ (Biografia de Jesus): estudos prontos em `estudos/bj/`, 8 fases cronológicas dos Evangelhos (nascimento e infância → ressurreição e ascensão); referências `F:` por livro, capítulo e versículo. Provas (20 questões ME + gabarito) geradas por fase em `provas/bj/`.
-- Pendente: CGO / Arauto, BWAH, CGB (10 unidades).
+- CGB: estratégia decidida em dois níveis. **Material principal = "Visão Geral da Bíblia"** em 4 partes (`estudos/cgb/01-estrutura-da-biblia`, `02-antigo-testamento`, `03-novo-testamento`, `04-grandes-acontecimentos`; 383 perguntas) com 4 provas de 20 questões (`provas/cgb/`). **Panoramas por livro sob demanda** (modelo: `estudos/cgb/genesis.md`, com prova), gerados só quando pedidos.
+- Qualidade de referências bíblicas: `python3 scripts/biblia_fonte.py estudos/<disc>/<unidade>.md` confere se cada `F:` bíblica existe na fonte (livro, capítulo e versículo); rodar sempre após escrever um estudo de CGB ou BJ. Ao escrever fatos bíblicos, confira também que a palavra-chave aparece no versículo (`biblia_fonte.verificar`).
+- Referência externa (regulamento de competições do DCER Mineiro, 2026, não oficial para esta embaixada): CGB = 20 perguntas, 5 alternativas, 20 minutos, 1 ponto cada; estuda-se "a estrutura da Bíblia, fatos históricos e acontecimentos importantes". Prova ELB (um livro específico, em 2026 Daniel) e Montagem Bíblica (ordem e divisões dos livros, número de capítulos) são provas à parte.
+- Pendente: BWAH; panoramas por livro do CGB sob demanda.

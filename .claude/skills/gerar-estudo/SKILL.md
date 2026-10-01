@@ -43,6 +43,13 @@ R: <resposta curta>
 F: <referência: obra, capítulo/tarefa, página — ou livro bíblico, capítulo, versículo>
 ```
 
+## Conhecimentos Gerais da Bíblia (CGB)
+
+- O material principal já existe: "Visão Geral da Bíblia" (`estudos/cgb/01..04`). Não crie 66 estudos de uma vez. Gere **panoramas por livro só sob demanda**, no modelo de `estudos/cgb/genesis.md`: visão geral do livro (posição, grupo, capítulos, divisões), grandes blocos/personagens/fatos, versículos-chave, 25 a 60 perguntas.
+- A fonte bíblica fica em `docs/cgb` (capítulo no título `# Livro Cap NN`, versículo em `**N**`). Para ler passagens, use `scripts/biblia_fonte.py` (`texto("Gênesis 1.1-3")`).
+- Antes de gerar o PDF, rode `python3 scripts/biblia_fonte.py <estudo.md>`: ele recusa referência que não existe. Para fatos, confira também que a palavra-chave aparece no versículo citado.
+- Fatos fora do texto bíblico (autor tradicional, significado do nome, agrupamentos) usam `F: Tradição bíblica` ou `F: Estrutura da Bíblia`.
+
 ## Revisão (status)
 
 Todo estudo nasce com `status: rascunho`. Só uma pessoa troca para `status: revisado`, depois de conferir os fatos e as referências contra o manual ou a Bíblia. O Claude nunca marca como revisado. Enquanto for rascunho, o script avisa ao gerar PDFs. Depois de revisado, mudar o estudo é correção deliberada: regerar as provas que dependem dele.

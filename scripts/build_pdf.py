@@ -114,11 +114,11 @@ def ref(fonte, tam):
 
 def ref_curta(fonte, titulo_secao, obra):
     """No estudo, tira da referência o que já está na obra (front matter 'obra:') e no título
-    da seção (ex.: 'Tarefa 2'), deixando só o que falta (ex.: 'p. 11')."""
+    da seção (ex.: 'Tarefa 2'), deixando só o que falta (ex.: 'p. 11'); se nada falta, devolve ''."""
     partes = [x.strip() for x in fonte.split(",")]
     sobra = [x for x in partes
              if x.lower() != obra.lower() and not titulo_secao.lower().startswith(x.lower())]
-    return ", ".join(sobra) or fonte
+    return ", ".join(sobra)
 
 
 def fim_com_paginas():
@@ -175,7 +175,7 @@ def typ_estudo(meta, secoes, tam):
             # espaço não separável entre rótulo e número ("p. 12", "Mateus 3.4") evita quebra no meio
             fonte = re.sub(r'(\S) (\d)', '\\1\u00a0\\2', esc(ref_curta(f, titulo, meta.get("obra", ""))))
             out.append(f'#block(breakable: false, below: 1.1em)[\n'
-                       f'*{n}. {esc(p)} ({fonte})* \\\n'
+                       f'*{n}. {esc(p)}{f" ({fonte})" if fonte else ""}* \\\n'
                        f'#text(fill: {cor})[*R:* {esc(r)}]\n]\n')
     out.append(fim_com_paginas())
     return "\n".join(out)

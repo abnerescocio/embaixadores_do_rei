@@ -1,0 +1,165 @@
+---
+titulo: Visão Geral da Bíblia — Parte 3: Novo Testamento
+disciplina: Conhecimentos Gerais da Bíblia
+estudo: estudos/cgb/03-novo-testamento.md
+---
+
+[ME] Qual Evangelho começa com a genealogia de Jesus?
+a) Mateus
+b) Marcos
+c) Lucas
+d) João
+R: a
+F: Mateus 1.1
+
+[ME] Qual Evangelho contém o Sermão do Monte?
+a) Marcos
+b) Lucas
+c) João
+d) Mateus
+R: d
+F: Mateus 5.1-2
+
+[ME] A quem Lucas dirigiu o seu Evangelho?
+a) A Timóteo
+b) A Teófilo
+c) A Tito
+d) A Filemom
+R: b
+F: Lucas 1.3
+
+[ME] Qual Evangelho começa com "No princípio era o Verbo"?
+a) Mateus
+b) Marcos
+c) João
+d) Lucas
+R: c
+F: João 1.1
+
+[ME] Qual livro conta o início da igreja e as viagens de Paulo?
+a) Romanos
+b) Hebreus
+c) Atos dos Apóstolos
+d) Apocalipse
+R: c
+F: Atos 1.1-2
+
+[ME] O que aconteceu no dia de Pentecostes?
+a) O Espírito Santo encheu os discípulos, que falaram em outras línguas
+b) Jesus subiu ao céu
+c) Paulo se converteu
+d) Estevão foi apedrejado
+R: a
+F: Atos 2.4
+
+[ME] Quem foi o primeiro mártir cristão?
+a) Tiago
+b) Estevão
+c) Pedro
+d) Barnabé
+R: b
+F: Atos 7.59-60
+
+[ME] Onde os discípulos foram chamados cristãos pela primeira vez?
+a) Em Jerusalém
+b) Em Roma
+c) Em Corinto
+d) Em Antioquia
+R: d
+F: Atos 11.26
+
+[ME] Segundo Romanos 6.23, qual é o salário do pecado?
+a) A fome
+b) A tristeza
+c) A pobreza
+d) A morte
+R: d
+F: Romanos 6.23
+
+[ME] Qual carta traz o capítulo do amor, 1 Coríntios 13?
+a) Romanos
+b) 1 Coríntios
+c) Gálatas
+d) Efésios
+R: b
+F: 1 Coríntios 13.13
+
+[ME] Qual carta diz que somos embaixadores de Cristo?
+a) 2 Coríntios
+b) Filipenses
+c) Colossenses
+d) Tito
+R: a
+F: 2 Coríntios 5.20
+
+[ME] Qual carta trata do fruto do Espírito?
+a) Efésios
+b) Colossenses
+c) Gálatas
+d) Tiago
+R: c
+F: Gálatas 5.22
+
+[ME] Qual é o escudo da armadura de Deus?
+a) O escudo da justiça
+b) O escudo da paz
+c) O escudo da fé
+d) O escudo da salvação
+R: c
+F: Efésios 6.16
+
+[ME] Qual carta convida: "Regozijai-vos sempre no Senhor"?
+a) Colossenses
+b) Filipenses
+c) Tito
+d) Filemom
+R: b
+F: Filipenses 4.4
+
+[ME] O que 1 Tessalonicenses 5.17 manda fazer?
+a) Jejuar sempre
+b) Pregar a todos
+c) Vigiar de noite
+d) Orar sem cessar
+R: d
+F: 1 Tessalonicenses 5.17
+
+[ME] O que Paulo declara em 2 Timóteo 4.7?
+a) "Combati o bom combate, acabei a carreira, guardei a fé."
+b) "Posso todas as coisas em Cristo."
+c) "Sou o menor dos apóstolos."
+d) "Para mim o viver é Cristo."
+R: a
+F: 2 Timóteo 4.7
+
+[ME] Qual carta fala do escravo Onésimo?
+a) Tito
+b) Filemom
+c) Judas
+d) 3 João
+R: b
+F: Filemom 1.10
+
+[ME] Qual carta diz que a fé sem obras é morta?
+a) Hebreus
+b) 1 Pedro
+c) Judas
+d) Tiago
+R: d
+F: Tiago 2.17
+
+[ME] O que 1 João 4.8 diz sobre Deus?
+a) "Deus é luz."
+b) "Deus é Espírito."
+c) "Deus é amor."
+d) "Deus é fiel."
+R: c
+F: 1 João 4.8
+
+[ME] Em qual ilha João recebeu as visões do Apocalipse?
+a) Em Patmos
+b) Em Creta
+c) Em Chipre
+d) Em Malta
+R: a
+F: Apocalipse 1.9

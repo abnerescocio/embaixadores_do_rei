@@ -1,0 +1,165 @@
+---
+titulo: Visão Geral da Bíblia — Parte 4: Grandes Acontecimentos
+disciplina: Conhecimentos Gerais da Bíblia
+estudo: estudos/cgb/04-grandes-acontecimentos.md
+---
+
+[ME] Qual foi o primeiro assassinato registrado na Bíblia?
+a) Esaú matou Jacó
+b) Caim matou o seu irmão Abel
+c) Lameque matou um jovem
+d) Absalão matou Amnom
+R: b
+F: Gênesis 4.8
+
+[ME] Qual acontecimento espalhou os povos e confundiu as línguas?
+a) A torre de Babel
+b) O dilúvio
+c) A saída do Egito
+d) O cativeiro babilônico
+R: a
+F: Gênesis 11.8-9
+
+[ME] Qual foi o filho da promessa nascido a Abraão e Sara na velhice?
+a) Ismael
+b) Jacó
+c) Isaque
+d) Esaú
+R: c
+F: Gênesis 21.2-3
+
+[ME] Em qual terra a família de Jacó passou a morar no Egito?
+a) Na terra de Moabe
+b) Na terra de Sinar
+c) Na terra de Canaã
+d) Na terra de Gósen
+R: d
+F: Gênesis 47.27
+
+[ME] O que o povo celebrou na noite da última praga?
+a) O Pentecostes
+b) Os tabernáculos
+c) O Purim
+d) A Páscoa
+R: d
+F: Êxodo 12.11
+
+[ME] O que Deus deu ao povo no deserto para comer?
+a) O pão sem fermento
+b) O maná
+c) As codornizes apenas
+d) O mel do rochedo
+R: b
+F: Êxodo 16.14-15
+
+[ME] Onde Deus deu a lei a Moisés?
+a) No monte Carmelo
+b) No monte Nebo
+c) No monte Sinai
+d) No monte Moriá
+R: c
+F: Êxodo 19.20
+
+[ME] Por que Israel andou quarenta anos pelo deserto?
+a) Por causa da incredulidade e murmuração diante da terra prometida
+b) Porque se perdeu no caminho
+c) Porque esperava a permissão de Faraó
+d) Porque Moisés desobedeceu a ordem de Josué
+R: a
+F: Números 14.33-34
+
+[ME] Qual foi a primeira cidade tomada em Canaã?
+a) Jericó
+b) Ai
+c) Betel
+d) Siquém
+R: a
+F: Josué 6.20
+
+[ME] Quem foi ungido rei no lugar de Saul?
+a) Salomão
+b) Jônatas
+c) Davi
+d) Absalão
+R: c
+F: 1 Samuel 16.13
+
+[ME] Quem construiu o templo de Jerusalém?
+a) Davi
+b) Salomão
+c) Zorobabel
+d) Neemias
+R: b
+F: 1 Reis 6.1
+
+[ME] O que aconteceu ao reino depois da morte de Salomão?
+a) Foi conquistado pelo Egito
+b) Passou a ser governado por juízes
+c) Foi unido a Moabe
+d) Dividiu-se em dois: Israel (norte) e Judá (sul)
+R: d
+F: 1 Reis 12.20
+
+[ME] Qual reino foi levado cativo pela Assíria?
+a) O reino do sul (Judá)
+b) Moabe
+c) Edom
+d) O reino do norte (Israel)
+R: d
+F: 2 Reis 17.6
+
+[ME] Qual rei permitiu a volta dos judeus a Jerusalém?
+a) Nabucodonosor
+b) Dario, o medo
+c) Ciro, rei da Pérsia
+d) Belsazar
+R: c
+F: Esdras 1.1-3
+
+[ME] Onde Jesus nasceu?
+a) Em Belém da Judeia
+b) Em Nazaré
+c) Em Jerusalém
+d) Em Cafarnaum
+R: a
+F: Mateus 2.1
+
+[ME] Quantos apóstolos Jesus escolheu?
+a) Setenta
+b) Doze
+c) Sete
+d) Dez
+R: b
+F: Marcos 3.14
+
+[ME] Qual homem Jesus ressuscitou depois de quatro dias no sepulcro?
+a) Jairo
+b) O filho da viúva de Naim
+c) Lázaro
+d) Tabita
+R: c
+F: João 11.43-44
+
+[ME] Onde Jesus foi crucificado?
+a) No Gólgota (Lugar da Caveira)
+b) No monte das Oliveiras
+c) No monte Sião
+d) Em Betânia
+R: a
+F: Mateus 27.33
+
+[ME] Qual foi a primeira igreja da Europa fundada por Paulo?
+a) Atenas
+b) Éfeso
+c) Corinto
+d) Filipos
+R: d
+F: Atos 16.12-14
+
+[ME] Qual cidade enviou Paulo e Barnabé na primeira viagem missionária?
+a) Jerusalém
+b) Antioquia
+c) Éfeso
+d) Roma
+R: b
+F: Atos 13.1-3
