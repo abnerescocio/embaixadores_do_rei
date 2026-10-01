@@ -50,6 +50,12 @@ F: <referência: obra, capítulo/tarefa, página — ou livro bíblico, capítul
 - Antes de gerar o PDF, rode `python3 scripts/biblia_fonte.py <estudo.md>`: ele recusa referência que não existe. Para fatos, confira também que a palavra-chave aparece no versículo citado.
 - Fatos fora do texto bíblico (autor tradicional, significado do nome, agrupamentos) usam `F: Tradição bíblica` ou `F: Estrutura da Bíblia`.
 
+## Biografia de William Alvin Hatton (BWAH)
+
+- A fonte é o livro "Sempre Embaixador" (`docs/bwah`), com marcadores de página `<!-- página NN -->`. Um estudo por capítulo; referência no formato `Sempre Embaixador, Capítulo N, p. X`.
+- Confira cada fato pela palavra-chave na página citada com `scripts/livro_fonte.py` (`Livro(...).confere("14-15", "Powell")`). A página de um trecho é a do marcador que vem *antes* dele.
+- Se o livro divergir do Manual do Arauto, siga o livro neste estudo e registre a divergência no `CLAUDE.md`.
+
 ## Revisão (status)
 
 Todo estudo nasce com `status: rascunho`. Só uma pessoa troca para `status: revisado`, depois de conferir os fatos e as referências contra o manual ou a Bíblia. O Claude nunca marca como revisado. Enquanto for rascunho, o script avisa ao gerar PDFs. Depois de revisado, mudar o estudo é correção deliberada: regerar as provas que dependem dele.

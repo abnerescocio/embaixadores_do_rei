@@ -1,0 +1,165 @@
+---
+titulo: Sempre Embaixador — Parte 2: Em Arkansas
+disciplina: Biografia de William Alvin Hatton
+estudo: estudos/bwah/02-em-arkansas.md
+---
+
+[ME] Quando Alvin chegou a Little Rock, em Arkansas?
+a) Em 20 de maio de 1947
+b) Em 14 de outubro de 1947
+c) Em 4 de março de 1948
+d) Em 2 de junho de 1945
+R: d
+F: Sempre Embaixador, Capítulo 2, p. 29
+
+[ME] Quem foi o pai de Katie?
+a) J. Ivyloy Bishop, pastor em Little Rock
+b) Rex Beard, missionário aos índios
+c) Thomas Hurley Jordan, pastor da Igreja Batista de Dermott
+d) Alberto Bagby, missionário no Brasil
+R: c
+F: Sempre Embaixador, Capítulo 2, p. 29
+
+[ME] Quem foi o pioneiro dos coordenadores dos ER nos EUA?
+a) J. Ivyloy Bishop
+b) Rex Beard
+c) Loyd Corder
+d) Clovis Brantley
+R: a
+F: Sempre Embaixador, Capítulo 2, p. 28
+
+[ME] Qual nova revista dos ER foi lançada nos EUA na época?
+a) O Embaixador
+b) Ambassador Life
+c) Royal Service
+d) The Commission
+R: b
+F: Sempre Embaixador, Capítulo 2, p. 28
+
+[ME] Qual missionário tentou ensinar português a Alvin no seminário?
+a) James Musgrave
+b) Arnaldo Harrington
+c) J. J. Cowsert
+d) Waldomiro Motta
+R: b
+F: Sempre Embaixador, Capítulo 2, p. 30
+
+[ME] Qual peça de drama religioso Alvin encenou no seminário?
+a) "Pilgrim's Progress"
+b) "The Royal Ambassador"
+c) "Missions in Brazil"
+d) "Brazilian Gold" (Ouro Brasileiro)
+R: d
+F: Sempre Embaixador, Capítulo 2, p. 30
+
+[ME] Qual frase a moça disse a Alvin sobre o seu entusiasmo?
+a) "Você está apaixonado, mas pelo Brasil"
+b) "Você está apaixonado pelas missões"
+c) "Você está apaixonado pelo seminário"
+d) "Você está apaixonado pelo Texas"
+R: a
+F: Sempre Embaixador, Capítulo 2, p. 30
+
+[ME] Quantos anos Alvin tinha quando recebeu a convocação para a guerra?
+a) 21 anos
+b) 28 anos
+c) 24 anos
+d) 30 anos
+R: c
+F: Sempre Embaixador, Capítulo 2, p. 31
+
+[ME] Qual igreja convidou Alvin para ser assistente do pastor?
+a) A Primeira Igreja Batista de Little Rock
+b) A Igreja Batista Universitária
+c) A Segunda Igreja Batista de Hot Springs
+d) A Primeira Igreja Batista de Van Buren
+R: c
+F: Sempre Embaixador, Capítulo 2, p. 31
+
+[ME] Quantos anos Alvin foi Coordenador dos ER em Arkansas?
+a) Dois anos completos
+b) Seis meses
+c) Cinco anos
+d) Um ano
+R: a
+F: Sempre Embaixador, Capítulo 2, p. 31
+
+[ME] Quando e onde Alvin e Katie se casaram?
+a) Em 13 de agosto de 1946, em Hot Springs
+b) Em 14 de outubro de 1947, em Little Rock
+c) Em 2 de junho de 1945, em Dermott
+d) Em 20 de maio de 1947, em Van Buren, Arkansas
+R: d
+F: Sempre Embaixador, Capítulo 2, p. 33
+
+[ME] Quando Alvin ficou noivo de Katie?
+a) Em 20 de maio de 1947
+b) Em 13 de agosto de 1946
+c) Em 2 de junho de 1945
+d) Em 3 de maio de 1946
+R: b
+F: Sempre Embaixador, Capítulo 2, p. 33
+
+[ME] Quando Alvin e Katie foram nomeados missionários para o Brasil, segundo o livro?
+a) Em 20 de maio de 1947
+b) Em 14 de outubro de 1947
+c) Em 4 de março de 1948
+d) Em 13 de agosto de 1946
+R: b
+F: Sempre Embaixador, Capítulo 2, p. 33
+
+[ME] Em que veículo viajaram os ER na viagem de missões nacionais?
+a) Numa camionete do exército chamada "Arabella"
+b) Num ônibus escolar
+c) Num trem
+d) Num caminhão alugado
+R: a
+F: Sempre Embaixador, Capítulo 2, p. 34
+
+[ME] Quantos índios, de quantas tribos, estavam no acampamento de Falls Creek?
+a) Cerca de 100, de 5 tribos
+b) Cerca de 1.000, de 20 tribos
+c) Entre 400 e 500, de 14 tribos
+d) Cerca de 200, de 10 tribos
+R: c
+F: Sempre Embaixador, Capítulo 2, p. 35
+
+[ME] Qual seminário visitaram em Fort Worth, o maior seminário batista do mundo?
+a) O Seminário de Nova Orleans
+b) O Seminário de Louisville
+c) O Seminário Hardin-Simmons
+d) O Seminário Southwestern
+R: d
+F: Sempre Embaixador, Capítulo 2, pp. 35-36
+
+[ME] Quem era o ventríloquo que falou sobre o trabalho com os mexicanos?
+a) Pr. Loyd Corder, com o boneco Joe Baptist
+b) Pr. Rex Beard, com o boneco Joe
+c) Pr. Pedro Hernandez, com o boneco Pedro
+d) J. Ivyloy Bishop, com o boneco Bill
+R: a
+F: Sempre Embaixador, Capítulo 2, p. 36
+
+[ME] Qual local histórico visitaram em San Antonio?
+a) O Capitólio
+b) A Casa Branca
+c) O Álamo
+d) O Forte Worth
+R: c
+F: Sempre Embaixador, Capítulo 2, p. 36
+
+[ME] Qual pastor mexicano os recebeu em Houston?
+a) Pr. Rex Beard
+b) Pr. Pedro Hernandez, da Igreja Batista Central
+c) Pr. Clovis Brantley
+d) Pr. Loyd Corder
+R: b
+F: Sempre Embaixador, Capítulo 2, p. 36
+
+[ME] Qual missão visitaram em Nova Orleans?
+a) A Casa de Amizade, dirigida por Rex Beard
+b) A Missão aos Índios, dirigida por Salassi
+c) O Lar das Mães Solteiras, dirigido por Corder
+d) A Missão Batista de Socorro, dirigida por Clovis Brantley
+R: d
+F: Sempre Embaixador, Capítulo 2, p. 36
