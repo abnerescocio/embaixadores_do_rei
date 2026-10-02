@@ -18,7 +18,7 @@ A sigla é o nome da pasta de origem e o **prefixo dos PDFs**.
 ```
 docs/                  fontes (texto das obras, não editar)
 estudos/<sigla>/       estudos em Markdown  (a fonte da verdade do material)
-provas/<sigla>/        provas em Markdown   (nascem do estudo)
+provas/<sigla>/<unidade>/NNN.md   provas em Markdown (nascem do estudo; o número é o nome do arquivo)
 saida/                 PDFs gerados (não editar à mão)
 ├── estudos/           todos os PDFs de estudo, juntos
 ├── provas/            todos os PDFs de prova, juntos (o que o aluno recebe)
@@ -38,7 +38,8 @@ Tudo começa pela sigla da disciplina, então a ordem alfabética agrupa por dis
 | Gabarito | `saida/gabaritos/<sigla>_<NNN>_<unidade>-gabarito.pdf` | `cgo_001_escudeiro-gabarito.pdf` |
 
 - **Estudo é canônico:** não tem número; o PDF é sobrescrito sempre que o estudo é regerado. Futuramente terá versão e data de alteração dentro do material.
-- **Prova guarda as versões:** `NNN` é sequencial **por unidade** (`cgo_001_escudeiro`, `cgo_002_escudeiro`...) e nunca sobrescreve. A prova e o gabarito da mesma geração dividem o número, que também aparece dentro do PDF, junto com a data.
+- **O número da prova vem do arquivo-fonte, não da pasta `saida/`:** `provas/cgo/arauto/002.md` gera `cgo_002_arauto-prova.pdf` e `cgo_002_arauto-gabarito.pdf`. Não existe contador: sigla, unidade e número são lidos do caminho do arquivo. Apagar `saida/` e regerar produz exatamente os mesmos nomes.
+- **Prova nova** (questões diferentes da mesma unidade) = arquivo novo com o **próximo número livre** da pasta (`001.md`, `002.md`, `003.md`...). Regerar uma prova existente sobrescreve o PDF dela, porque o conteúdo é o mesmo.
 - **Unidade** é o nome do arquivo Markdown (`escudeiro`, `arauto`, `01-nascimento-infancia`, `genesis`...).
 
 ## Como gerar
@@ -47,7 +48,7 @@ Requisito: [Typst](https://typst.app) instalado (`brew install typst`) e Python 
 
 ```bash
 python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md   # -> saida/estudos/cgo_escudeiro.pdf
-python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md    # -> saida/provas/cgo_001_escudeiro-prova.pdf e saida/gabaritos/cgo_001_escudeiro-gabarito.pdf
+python3 scripts/build_pdf.py prova  provas/cgo/escudeiro/001.md # -> saida/provas/cgo_001_escudeiro-prova.pdf e saida/gabaritos/cgo_001_escudeiro-gabarito.pdf
 ```
 
 Também dá para pedir ao Claude com as skills `gerar-estudo` e `gerar-prova`.
@@ -75,7 +76,7 @@ F: Manual do Escudeiro, Tarefa 1, p. 8
 - `F:` é a **referência** (obra, capítulo/tarefa, página; ou livro bíblico, capítulo e versículo). É obrigatória.
 - No PDF do estudo cada seção tem uma cor fixa e um quadradinho; a referência aparece ao lado da pergunta.
 
-**Prova** (`provas/<sigla>/<unidade>.md`): **sempre 20 questões** de múltipla escolha com **4 alternativas (A, B, C e D)**.
+**Prova** (`provas/<sigla>/<unidade>/NNN.md`): **sempre 20 questões** de múltipla escolha com **4 alternativas (A, B, C e D)**.
 
 ```
 [ME] Enunciado?

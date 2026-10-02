@@ -10,7 +10,7 @@ Embaixada: **Embaixada Pastor José Saraiva** — Primeira Igreja Batista em Pot
 docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
                          |
                          v
-                    provas/*.md   ->  saida/provas/<disc>_NNN_<unidade>-prova.pdf
+                    provas/<disc>/<unidade>/NNN.md ->  saida/provas/<disc>_NNN_<unidade>-prova.pdf
                                     saida/gabaritos/<disc>_NNN_<unidade>-gabarito.pdf
 ```
 
@@ -19,14 +19,14 @@ docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
 - A prova nasce do **estudo**, não das fontes. A prova é **sempre só de marcar (múltipla escolha A–D)** e termina com um cartão-resposta de bolinhas; o gabarito é o espelho exato da prova com as respostas marcadas.
 - **Estudo:** 2 colunas, fonte 11pt, quantas páginas precisar. **Prova e gabarito:** impressão frente e verso, sempre 2 páginas em 2 colunas (fonte automática, até 10pt); sempre 20 questões; página 1 = questões, página 2 = cartão-resposta.
 - **Referências obrigatórias:** toda pergunta do estudo e toda questão da prova tem `F:` (obra/capítulo/página ou livro bíblico/capítulo/versículo). Aparecem ao lado do enunciado, no estudo e no gabarito (nunca na prova do aluno).
-- `saida/` é gerado; não editar à mão. Três pastas (`estudos`, `provas`, `gabaritos`), com os PDFs de cada tipo juntos e a sigla da disciplina como prefixo: `saida/estudos/<disc>_<unidade>.pdf` (estudo canônico, nome fixo, sobrescrito ao regerar) `saida/provas/<disc>_NNN_<unidade>-prova.pdf` e `saida/gabaritos/<disc>_NNN_<unidade>-gabarito.pdf` (NNN sequencial por unidade, nunca sobrescreve). Detalhes no `README.md`.
+- `saida/` é gerado; não editar à mão. Três pastas (`estudos`, `provas`, `gabaritos`), com os PDFs de cada tipo juntos e a sigla da disciplina como prefixo: `saida/estudos/<disc>_<unidade>.pdf` (estudo canônico, nome fixo, sobrescrito ao regerar) `saida/provas/<disc>_NNN_<unidade>-prova.pdf` e `saida/gabaritos/<disc>_NNN_<unidade>-gabarito.pdf` (NNN = nome do arquivo-fonte `provas/<disc>/<unidade>/NNN.md`; sem contador e sem olhar `saida/`; prova nova = próximo número livre da pasta). Detalhes no `README.md`.
 
 ## Fluxo de qualidade
 
 1. O Claude escreve o estudo (`status: rascunho`).
 2. Uma pessoa revisa fatos e referências contra a fonte e troca para `status: revisado`.
 3. Provas e gabaritos nascem do estudo; o script valida que cada `F:` da prova existe no estudo.
-4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (o PDF do estudo é sobrescrito; os de prova guardam as versões pela numeração NNN).
+4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (o PDF do estudo é sobrescrito; regerar uma prova sobrescreve o PDF dela; o número vem do nome do arquivo-fonte).
 
 ## Material de estudo
 
@@ -41,7 +41,7 @@ Apenas **pergunta e resposta curta**, para decorar. Nada de resumo ou resposta l
 | `bj` | Biografia de Jesus | `bj/06-evangelhos-…md` (Evangelhos; idêntico a `cgb/06`) |
 | `bwah` | Biografia de William Alvin Hatton | `bwah/Alvin Hatton - Sempre Embaixador…md` |
 
-Nome da unidade (arquivo em `estudos/` e `provas/`) = slug curto: `escudeiro`, `arauto`, `pentateuco`, `evangelhos`, `atos`, `sempre-embaixador`…
+Nome da unidade (arquivo em `estudos/<sigla>/` e pasta em `provas/<sigla>/`) = slug curto: `escudeiro`, `arauto`, `pentateuco`, `evangelhos`, `atos`, `sempre-embaixador`…
 
 ## Status
 

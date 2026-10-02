@@ -3,12 +3,16 @@
 
 Uso:
     python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md
-    python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md
+    python3 scripts/build_pdf.py prova  provas/cgo/escudeiro/001.md
 
-Saída (três pastas; o prefixo é a sigla da disciplina, pasta de origem em estudos/ e provas/):
+Saída (três pastas; o prefixo é a sigla da disciplina):
     estudo   -> saida/estudos/cgo_escudeiro.pdf              (canônico: nome fixo, sobrescrito ao regerar)
-    prova    -> saida/provas/cgo_001_escudeiro-prova.pdf      (NNN sequencial por unidade, nunca sobrescreve)
+    prova    -> saida/provas/cgo_001_escudeiro-prova.pdf
     gabarito -> saida/gabaritos/cgo_001_escudeiro-gabarito.pdf (mesmo número da prova)
+Sigla, unidade e número vêm do CAMINHO do arquivo-fonte, sem contador e sem olhar a pasta saida/:
+    estudos/<sigla>/<unidade>.md         -> estudo
+    provas/<sigla>/<unidade>/<NNN>.md    -> prova NNN (o número é o nome do arquivo; regerar a mesma
+                                            prova sobrescreve o mesmo PDF; prova nova = próximo número)
 A data de geração aparece dentro do PDF; na prova também o número (subtítulo e rodapé).
 
 Estudo: 2 colunas, fonte fixa (FONTE_ESTUDO), quantas páginas forem necessárias.
@@ -301,14 +305,6 @@ def verificar_prova(meta, questoes):
         print(f"⚠ O estudo {rel} ainda não está marcado como revisado (status: {estudo_meta.get('status', 'sem status')}).")
 
 
-def proximo_numero(disciplina, nome):
-    """Próximo NNN livre para as provas da unidade (saida/provas/<disc>_NNN_<unidade>-prova.pdf)."""
-    pasta = SAIDA / "provas"
-    usados = [int(m.group(1)) for f in pasta.glob(f"{disciplina}_*_{nome}-prova.pdf")
-              if (m := re.match(rf'{re.escape(disciplina)}_(\d+)_{re.escape(nome)}-prova\.pdf$', f.name))]
-    return f"{max(usados, default=0) + 1:03d}"
-
-
 def _typ_temp(typ):
     f = tempfile.NamedTemporaryFile("w", suffix=".typ", delete=False, encoding="utf-8")
     f.write(typ)
@@ -352,14 +348,15 @@ def main():
         sys.exit(__doc__)
     modo, entrada = sys.argv[1], Path(sys.argv[2]).resolve()
     meta, linhas = ler_md(entrada)
-    nome = entrada.stem
-    disc = entrada.parent.name  # sigla da disciplina: cgo, cgb, bj, bwah
-    hoje = date.today().strftime('%d/%m/%Y')
     if modo == "estudo":
-        meta["rotulo"] = hoje  # o estudo é canônico: sem número de geração
+        nome, disc = entrada.stem, entrada.parent.name          # estudos/<sigla>/<unidade>.md
     else:
-        num = proximo_numero(disc, nome)
-        meta["rotulo"] = f"nº {num} · {hoje}"
+        if not re.fullmatch(r'\d{3}', entrada.stem):
+            sys.exit("O arquivo da prova deve se chamar NNN.md (ex.: provas/cgo/arauto/002.md).")
+        num = entrada.stem                                      # provas/<sigla>/<unidade>/NNN.md
+        nome, disc = entrada.parent.name, entrada.parent.parent.name
+    hoje = date.today().strftime('%d/%m/%Y')
+    meta["rotulo"] = hoje if modo == "estudo" else f"nº {num} · {hoje}"
     if modo == "estudo":
         if meta.get("status") != "revisado":
             print(f"⚠ Estudo ainda não revisado (status: {meta.get('status', 'sem status')}).")
