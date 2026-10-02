@@ -26,7 +26,7 @@ docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
 1. O Claude escreve o estudo (`status: rascunho`).
 2. Uma pessoa revisa fatos e referências contra a fonte e troca para `status: revisado`.
 3. Provas e gabaritos nascem do estudo; cada questão tem `E:` (ID `I:` da pergunta de origem) e o script valida o ID, o `F:` e o limite de 5 questões em comum entre provas da mesma unidade.
-3b. Controle de uso: `python3 scripts/ids.py <estudo.md>` numera perguntas novas (`I: NNN`, nunca renumerar); `python3 scripts/cobertura.py <estudo.md> [--livres|--usos]` mostra o que já caiu em provas. Ao montar prova nova, priorizar as perguntas nunca usadas e distribuir por seção. Níveis (essencial/normal/detalhe) e dificuldade por resultado de alunos são etapas futuras.
+3b. Controle de uso: `python3 scripts/ids.py <estudo.md>` numera perguntas novas (`I: NNN`, nunca renumerar; o ID é o número exibido no PDF do estudo e aparece como `Estudo #NN` no gabarito, nunca na prova do aluno); `python3 scripts/cobertura.py <estudo.md> [--livres|--usos]` mostra o que já caiu em provas. Ao montar prova nova, priorizar as perguntas nunca usadas e distribuir por seção. Níveis (essencial/normal/detalhe) e dificuldade por resultado de alunos são etapas futuras.
 4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (o PDF do estudo é sobrescrito; regerar uma prova sobrescreve o PDF dela; o número vem do nome do arquivo-fonte).
 
 ## Material de estudo

@@ -75,7 +75,7 @@ I: 001
 ```
 
 - `F:` é a **referência** (obra, capítulo/tarefa, página; ou livro bíblico, capítulo e versículo). É obrigatória.
-- `I:` é o **ID estável** da pergunta (gerado por `python3 scripts/ids.py`, nunca renumerar). A prova o cita em `E:`.
+- `I:` é o **ID estável** da pergunta (gerado por `python3 scripts/ids.py`, nunca renumerar). A prova o cita em `E:`. **O ID é a numeração da pergunta no PDF do estudo** (pode haver saltos se alguma pergunta for removida) e aparece no gabarito como `Estudo #NN`, ao lado da referência. A prova do aluno não mostra ID.
 - No PDF do estudo cada seção tem uma cor fixa e um quadradinho; a referência aparece ao lado da pergunta.
 
 **Prova** (`provas/<sigla>/<unidade>/NNN.md`): **sempre 20 questões** de múltipla escolha com **4 alternativas (A, B, C e D)**.

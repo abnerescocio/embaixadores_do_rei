@@ -112,8 +112,10 @@ def cabecalho(meta, subtitulo, tam):
 {titulo_bloco(meta, subtitulo)}'''
 
 
-def ref(fonte, tam):
-    """Referência em cinza, menor, para ir ao lado do enunciado."""
+def ref(fonte, tam, id_estudo=""):
+    """Referência em cinza, menor, para ir ao lado do enunciado (com o ID da pergunta no estudo)."""
+    if id_estudo:
+        fonte += f" · Estudo #{int(id_estudo) if id_estudo.isdigit() else id_estudo}"
     return f'#text(size: {tam - 1.5}pt, weight: "regular", fill: gray)[‹{esc(fonte)}›]'
 
 
@@ -170,7 +172,6 @@ def parse_estudo(linhas):
 def typ_estudo(meta, secoes, tam):
     out = [cabecalho(meta, "Estudo", tam), '#set par(leading: 0.7em)',
            '#show: columns.with(2, gutter: 0.6cm)\n']
-    n = 0
     for i, (titulo, qas) in enumerate(secoes):
         cor = f'rgb("{CORES_SECAO[i % len(CORES_SECAO)]}")'
         if titulo:
@@ -178,8 +179,8 @@ def typ_estudo(meta, secoes, tam):
                        f'[#box(width: 0.6em, height: 0.6em, fill: {cor}, baseline: 0.5pt) #h(0.3em)'
                        f'#text(size: {tam + 1.5}pt, weight: "bold", fill: {cor})[{esc(titulo)}]'
                        f'#v(-0.35em)#line(length: 100%, stroke: 0.5pt + {cor})]\n')
-        for p, r, f, _id in qas:
-            n += 1
+        for p, r, f, n in qas:  # n = ID estável da pergunta (vira a numeração do estudo)
+            n = int(n) if n.isdigit() else n
             # espaço não separável entre rótulo e número ("p. 12", "Mateus 3.4") evita quebra no meio
             fonte = re.sub(r'(\S) (\d)', '\\1\u00a0\\2', esc(ref_curta(f, titulo, meta.get("obra", ""))))
             out.append(f'#block(breakable: false, below: 1.1em)[\n'
@@ -277,7 +278,7 @@ def typ_prova(meta, questoes, gabarito, tam):
                 opcoes.append(f'#h(1em)#highlight(fill: rgb("#fde3e6"))[{marca(o)}] \\')
             else:
                 opcoes.append(f'#h(1em)#[{esc(o)}] \\')
-        fonte = f' {ref(q["fonte"], tam)}' if gabarito else ''
+        fonte = f' {ref(q["fonte"], tam, q["id"])}' if gabarito else ''
         bloco = f'*{i}. {esc(q["enunciado"])}*{fonte} \\\n' + "\n".join(opcoes) + "\n"
         blocos.append(f'#block(breakable: false, below: 0.7em)[\n{bloco}]\n')
     out.append('#columns(2, gutter: 0.7cm)[\n' + "\n".join(blocos) + ']\n')
