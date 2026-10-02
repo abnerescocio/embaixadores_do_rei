@@ -41,6 +41,7 @@ fonte: <caminho em docs/>
 P: <pergunta>
 R: <resposta curta>
 F: <referência: obra, capítulo/tarefa, página — ou livro bíblico, capítulo, versículo>
+I: <ID estável, gerado por scripts/ids.py>
 ```
 
 ## Conhecimentos Gerais da Bíblia (CGB)
@@ -48,6 +49,7 @@ F: <referência: obra, capítulo/tarefa, página — ou livro bíblico, capítul
 - O material principal já existe: "Visão Geral da Bíblia" (`estudos/cgb/01..04`). Não crie 66 estudos de uma vez. Gere **panoramas por livro só sob demanda**, no modelo de `estudos/cgb/genesis.md`: visão geral do livro (posição, grupo, capítulos, divisões), grandes blocos/personagens/fatos, versículos-chave, 25 a 60 perguntas.
 - A fonte bíblica fica em `docs/cgb` (capítulo no título `# Livro Cap NN`, versículo em `**N**`). Para ler passagens, use `scripts/biblia_fonte.py` (`texto("Gênesis 1.1-3")`).
 - Antes de gerar o PDF, rode `python3 scripts/biblia_fonte.py <estudo.md>`: ele recusa referência que não existe. Para fatos, confira também que a palavra-chave aparece no versículo citado.
+- **IDs (`I: NNN`):** depois de escrever ou acrescentar perguntas, rode `python3 scripts/ids.py <estudo.md>`; ele numera só as que não têm ID. **Nunca renumere, reutilize nem apague a linha `I:`** de uma pergunta existente (as provas apontam para ela via `E:`); pergunta removida deixa o número órfão. Ao corrigir o texto de uma pergunta, o ID permanece.
 - Fatos fora do texto bíblico (autor tradicional, significado do nome, agrupamentos) usam `F: Tradição bíblica` ou `F: Estrutura da Bíblia`.
 
 ## Biografia de William Alvin Hatton (BWAH)

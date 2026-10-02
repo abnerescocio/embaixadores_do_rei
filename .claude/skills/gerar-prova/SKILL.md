@@ -14,6 +14,8 @@ Produz `provas/<disciplina>/<unidade>/NNN.md` e, em `saida/provas/`, `<disc>_<un
 - **A prova é sempre só de marcar: múltipla escolha com alternativas A, B, C e D.** Não gerar V/F, completar nem resposta curta.
 - Toda questão deve ter resposta verificável no estudo. Não invente fatos.
 - **Toda questão tem `F:` (obrigatório)**: copie a referência da pergunta correspondente no estudo (obra/capítulo/página ou livro/capítulo/versículo). O script recusa questão sem referência e **recusa referência que não exista no estudo** (campo `estudo:` do cabeçalho da prova), portanto copie o `F:` exatamente como está no estudo. No gabarito ela aparece **ao lado do enunciado** da questão (nunca na prova do aluno).
+- **Toda questão tem `E:` (obrigatório)**: o ID (`I:`) da pergunta do estudo que originou a questão. O script recusa `E:` inexistente, `F:` diferente do `F:` daquele ID e `E:` repetido na mesma prova.
+- **Controle de uso:** antes de escolher as perguntas, rode `python3 scripts/cobertura.py estudos/<disc>/<unidade>.md --livres`. Priorize perguntas **nunca usadas** (depois as menos usadas) e distribua pelas seções. **Duas provas da mesma unidade podem ter no máximo 5 das 20 questões em comum** (`MAX_EM_COMUM`; o script recusa acima disso). Ao terminar, rode a cobertura de novo e informe quantas perguntas ainda estão livres.
 - **Sempre exatamente 20 questões** (o script recusa outra quantidade), cobrindo todas as seções do estudo proporcionalmente.
 - Exatamente 4 alternativas (a–d), uma só correta. Distratores plausíveis, preferencialmente tirados de itens parecidos do mesmo estudo.
 - Varie a posição da alternativa correta (distribua entre a, b, c e d).
@@ -44,11 +46,13 @@ c) ...
 d) ...
 R: b
 F: <mesma referência do estudo>
+E: <ID da pergunta no estudo, ex.: 042>
 ```
 
 ## Passos
 
-1. Leia o estudo (se o `status` dele ainda for `rascunho`, avise o usuário; o script também avisa).
+1. Leia o estudo (se o `status` dele ainda for `rascunho`, avise o usuário; o script também avisa). Se ele não tiver `I:`, rode `python3 scripts/ids.py <estudo.md>`.
+1b. Rode o relatório de cobertura e escolha as perguntas conforme as regras acima.
 2. Escreva `provas/<disciplina>/<unidade>/NNN.md` (próximo número livre da pasta).
 3. Rode `python3 scripts/build_pdf.py prova provas/<disciplina>/<unidade>/NNN.md`.
 4. Informe os caminhos dos PDFs e quantas questões a prova tem.

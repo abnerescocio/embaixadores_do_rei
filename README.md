@@ -23,7 +23,7 @@ saida/                 PDFs gerados (não editar à mão)
 ├── estudos/           todos os PDFs de estudo, juntos
 ├── provas/            todos os PDFs de prova, juntos (o que o aluno recebe)
 └── gabaritos/         todos os PDFs de gabarito, juntos (só para o aplicador)
-scripts/               ferramentas (build_pdf.py, biblia_fonte.py, livro_fonte.py)
+scripts/               ferramentas (build_pdf.py, ids.py, cobertura.py, biblia_fonte.py, livro_fonte.py)
 .claude/skills/        skills gerar-estudo e gerar-prova
 ```
 
@@ -71,9 +71,11 @@ status: rascunho
 P: Quais são os postos da organização, em ordem?
 R: Escudeiro, Arauto, Sênior e Emérito.
 F: Manual do Escudeiro, Tarefa 1, p. 8
+I: 001
 ```
 
 - `F:` é a **referência** (obra, capítulo/tarefa, página; ou livro bíblico, capítulo e versículo). É obrigatória.
+- `I:` é o **ID estável** da pergunta (gerado por `python3 scripts/ids.py`, nunca renumerar). A prova o cita em `E:`.
 - No PDF do estudo cada seção tem uma cor fixa e um quadradinho; a referência aparece ao lado da pergunta.
 
 **Prova** (`provas/<sigla>/<unidade>/NNN.md`): **sempre 20 questões** de múltipla escolha com **4 alternativas (A, B, C e D)**.
@@ -86,11 +88,21 @@ c) ...
 d) ...
 R: b
 F: (a mesma referência do estudo)
+E: 001   (ID da pergunta no estudo)
 ```
 
 - A prova tem **2 páginas** (frente e verso): questões em 2 colunas e o cartão-resposta de bolinhas, com o mesmo cabeçalho.
 - O **gabarito** é o espelho da prova, com a alternativa correta marcada e a referência ao lado do enunciado.
-- O script **recusa** a prova se alguma referência não existir no estudo indicado em `estudo:`.
+- O script **recusa** a prova se algum `E:` não existir no estudo indicado em `estudo:`, se o `F:` diferir do estudo, se um `E:` se repetir ou se a prova tiver **mais de 5 questões em comum** com outra prova da mesma unidade.
+
+## Controle de uso das perguntas
+
+```bash
+python3 scripts/cobertura.py estudos/cgo/arauto.md          # nunca usadas / 1 vez / 2+, sobreposição entre provas, por seção
+python3 scripts/cobertura.py estudos/cgo/arauto.md --livres # lista as perguntas ainda não usadas
+```
+
+Ao criar prova nova, prioriza-se o que ainda não caiu e distribui-se pelas seções.
 
 ## Fluxo de qualidade
 

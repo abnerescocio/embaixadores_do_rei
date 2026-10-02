@@ -39,6 +39,7 @@ EMBAIXADA = "Embaixada Pastor José Saraiva"
 IGREJA = "Primeira Igreja Batista em Potira I - Caucaia-CE"
 
 QUESTOES_PROVA = 20
+MAX_EM_COMUM = 5  # máximo de questões que duas provas da mesma unidade podem ter em comum
 MAX_PAGINAS = 2
 FONTE_ESTUDO = 11.0
 # Uma cor fixa por seção (na ordem, repetindo se houver mais seções que cores). Cores escuras,
@@ -133,7 +134,7 @@ def fim_com_paginas():
 # --------------------------------------------------------------------- estudo
 
 def parse_estudo(linhas):
-    """Lista de seções: (titulo, [[pergunta, resposta, fonte], ...])."""
+    """Lista de seções: (titulo, [[pergunta, resposta, fonte, id], ...])."""
     secoes, atual, alvo = [], None, None
     for linha in linhas:
         if linha.startswith("#"):
@@ -144,7 +145,7 @@ def parse_estudo(linhas):
             if atual is None:
                 atual = ("", [])
                 secoes.append(atual)
-            atual[1].append([linha[2:].strip(), "", ""])
+            atual[1].append([linha[2:].strip(), "", "", ""])
             alvo = 0
         elif linha.startswith("R:") and atual and atual[1]:
             atual[1][-1][1] = linha[2:].strip()
@@ -152,11 +153,14 @@ def parse_estudo(linhas):
         elif linha.startswith("F:") and atual and atual[1]:
             atual[1][-1][2] = linha[2:].strip()
             alvo = 2
+        elif linha.startswith("I:") and atual and atual[1]:
+            atual[1][-1][3] = linha[2:].strip()
+            alvo = None
         elif linha.strip() and alvo is not None:  # continuação
             atual[1][-1][alvo] += " " + linha.strip()
         else:
             alvo = None
-    sem_fonte = [n for n, (_, _, f) in enumerate((qa for _, qas in secoes for qa in qas), 1) if not f]
+    sem_fonte = [n for n, (_, _, f, _i) in enumerate((qa for _, qas in secoes for qa in qas), 1) if not f]
     if sem_fonte:
         sys.exit("Toda pergunta precisa de referência ('F:' com manual/capítulo/página ou "
                  f"livro/capítulo/versículo). Sem referência: {sem_fonte[:15]}")
@@ -174,7 +178,7 @@ def typ_estudo(meta, secoes, tam):
                        f'[#box(width: 0.6em, height: 0.6em, fill: {cor}, baseline: 0.5pt) #h(0.3em)'
                        f'#text(size: {tam + 1.5}pt, weight: "bold", fill: {cor})[{esc(titulo)}]'
                        f'#v(-0.35em)#line(length: 100%, stroke: 0.5pt + {cor})]\n')
-        for p, r, f in qas:
+        for p, r, f, _id in qas:
             n += 1
             # espaço não separável entre rótulo e número ("p. 12", "Mateus 3.4") evita quebra no meio
             fonte = re.sub(r'(\S) (\d)', '\\1\u00a0\\2', esc(ref_curta(f, titulo, meta.get("obra", ""))))
@@ -198,7 +202,7 @@ def parse_prova(linhas):
         s = linha.strip()
         m = re.match(r'\[ME\]\s*(.*)', s)
         if m:
-            q = {"enunciado": m.group(1), "opcoes": [], "resposta": "", "fonte": ""}
+            q = {"enunciado": m.group(1), "opcoes": [], "resposta": "", "fonte": "", "id": ""}
             questoes.append(q)
         elif re.match(r'\[[A-Z]{2}\]', s):
             sys.exit(f"Tipo de questão não suportado (a prova é só de marcar, use [ME]): {s[:40]}")
@@ -208,6 +212,8 @@ def parse_prova(linhas):
             q["resposta"] = s[2:].strip()
         elif s.startswith("F:"):
             q["fonte"] = s[2:].strip()
+        elif s.startswith("E:"):
+            q["id"] = s[2:].strip()
         elif re.match(r'[a-d]\)', s):
             q["opcoes"].append(s)
         else:
@@ -221,6 +227,8 @@ def parse_prova(linhas):
             sys.exit(f"Questão {i}: precisa de alternativas a) b) c) d) e 'R:' com a letra correta.")
         if not q["fonte"]:
             sys.exit(f"Questão {i}: falta a referência ('F:', copiada do estudo).")
+        if not q["id"]:
+            sys.exit(f"Questão {i}: falta o 'E:' (ID da pergunta do estudo que originou a questão).")
     return questoes
 
 
@@ -280,26 +288,44 @@ def typ_prova(meta, questoes, gabarito, tam):
 
 # ------------------------------------------------------------------ compilação
 
-def fontes_do_estudo(caminho):
-    """Conjunto das referências (F:) de um estudo."""
-    texto = Path(caminho).read_text(encoding="utf-8")
-    return set(re.findall(r'^F: (.*)$', texto, re.M))
+def ids_do_estudo(caminho):
+    """Dict id -> (pergunta, fonte) das perguntas de um estudo."""
+    _, linhas = ler_md(caminho)
+    return {i: (p, f) for _, qas in parse_estudo(linhas) for p, r, f, i in qas if i}
 
 
-def verificar_prova(meta, questoes):
-    """A prova nasce do estudo: o estudo precisa existir e cada F: da prova deve estar nele."""
+def verificar_prova(meta, questoes, entrada):
+    """A prova nasce do estudo: cada E: deve ser uma pergunta do estudo (com o mesmo F:), sem
+    repetir pergunta dentro da prova, e a prova não pode ter mais de MAX_EM_COMUM questões em
+    comum com outra prova da mesma unidade."""
     rel = meta.get("estudo")
     if not rel:
         sys.exit("A prova precisa do campo 'estudo:' no cabeçalho (caminho do estudo de origem).")
     caminho = RAIZ / rel
     if not caminho.exists():
         sys.exit(f"Estudo de origem não encontrado: {rel}")
-    fontes = fontes_do_estudo(caminho)
-    fora = [(i, q["fonte"]) for i, q in enumerate(questoes, 1) if q["fonte"] not in fontes]
-    if fora:
-        linhas = "\n".join(f"  questão {i}: {f!r}" for i, f in fora)
-        sys.exit(f"Referências que não existem no estudo {rel}:\n{linhas}\n"
-                 "Copie o F: exatamente como está no estudo (ou atualize o estudo).")
+    ids = ids_do_estudo(caminho)
+    if not ids:
+        sys.exit(f"O estudo {rel} ainda não tem IDs (linha 'I:'). Rode: python3 scripts/ids.py {rel}")
+    erros = []
+    for i, q in enumerate(questoes, 1):
+        if q["id"] not in ids:
+            erros.append(f"  questão {i}: E: {q['id']} não existe no estudo")
+        elif ids[q["id"]][1] != q["fonte"]:
+            erros.append(f"  questão {i}: F: difere do estudo (estudo: {ids[q['id']][1]!r})")
+    repetidos = sorted({q["id"] for q in questoes if [x["id"] for x in questoes].count(q["id"]) > 1})
+    if repetidos:
+        erros.append(f"  E: repetido dentro da prova: {', '.join(repetidos)}")
+    if erros:
+        sys.exit(f"Problemas na prova (referência ao estudo {rel}):\n" + "\n".join(erros))
+    meus = {q["id"] for q in questoes}
+    for outra in sorted(entrada.parent.glob("*.md")):
+        if outra.resolve() == entrada.resolve():
+            continue
+        comum = meus & set(re.findall(r'^E: (.*)$', outra.read_text(encoding="utf-8"), re.M))
+        if len(comum) > MAX_EM_COMUM:
+            sys.exit(f"Esta prova tem {len(comum)} questões em comum com {outra.stem} "
+                     f"(máximo {MAX_EM_COMUM}): {', '.join(sorted(comum))}")
     estudo_meta, _ = ler_md(caminho)
     if estudo_meta.get("status") != "revisado":
         print(f"⚠ O estudo {rel} ainda não está marcado como revisado (status: {estudo_meta.get('status', 'sem status')}).")
@@ -361,13 +387,16 @@ def main():
         if meta.get("status") != "revisado":
             print(f"⚠ Estudo ainda não revisado (status: {meta.get('status', 'sem status')}).")
         secoes = parse_estudo(linhas)
+        sem_id = sum(1 for _, qas in secoes for *_, i in qas if not i)
+        if sem_id:
+            print(f"⚠ {sem_id} pergunta(s) sem ID (linha 'I:'). Rode: python3 scripts/ids.py {entrada.relative_to(RAIZ)}")
         typ = typ_estudo(meta, secoes, FONTE_ESTUDO)
         compilar(typ, SAIDA / "estudos" / f"{disc}_{nome}.pdf")
         print(f"  {contar_perguntas(secoes)} perguntas · {contar_paginas(typ)} páginas · "
               f"fonte {FONTE_ESTUDO}pt")
     else:
         questoes = parse_prova(linhas)
-        verificar_prova(meta, questoes)
+        verificar_prova(meta, questoes, entrada)
         prova = lambda t: typ_prova(meta, questoes, False, t)
         gabarito = lambda t: typ_prova(meta, questoes, True, t)
         tam = escolher_fonte([prova, gabarito])  # mesma fonte nos dois: gabarito = espelho
