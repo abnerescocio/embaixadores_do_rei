@@ -7,7 +7,7 @@ description: Gera uma prova (e gabarito) em PDF dos Embaixadores do Rei a partir
 
 Parte **sempre** de um estudo existente em `estudos/<disciplina>/<unidade>.md` (não das fontes brutas). Se o estudo não existir, rode antes a skill `gerar-estudo`.
 
-Produz `provas/<disciplina>/<unidade>/NNN.md` e, em `saida/provas/`, `<disc>_<unidade>-prova_NNN.pdf` e, em `saida/gabaritos/`, `<disc>_<unidade>-gabarito_NNN.pdf` (ex.: `cgo_escudeiro-prova_001.pdf`; NNN sequencial por unidade).
+Produz `provas/<disciplina>/<unidade>/NNN.md` e, em `saida/provas/`, `<disc>_<unidade>_NNN.pdf` e, em `saida/gabaritos/`, `<disc>_<unidade>-gabarito_NNN.pdf` (ex.: `cgo_escudeiro_001.pdf`; NNN sequencial por unidade).
 
 ## Regras
 
