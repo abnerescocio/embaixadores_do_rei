@@ -1,0 +1,4 @@
+# fotos dos cartões (arquivos grandes; o que vale é o CSV ao lado)
+resultados/fotos/
+resultados/entrada/*
+!resultados/entrada/LEIA-ME.txt
