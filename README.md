@@ -104,6 +104,19 @@ python3 scripts/cobertura.py estudos/cgo/arauto.md --livres # lista as perguntas
 
 Ao criar prova nova, prioriza-se o que ainda não caiu e distribui-se pelas seções.
 
+## Resultados dos alunos
+
+```
+resultados/alunos.csv                       id,nome  (A01, A02...: o ID é estável; o nome é só rótulo)
+resultados/<sigla>/<unidade>/<NNN>.csv      aluno,foto,respostas,tentativa  (uma linha por cartão; 20 letras; tentativa 2, 3... se o aluno refez a prova, foto `A02-2.jpg`; o acerto por pergunta usa só a 1ª tentativa)
+resultados/fotos/<sigla>/<unidade>/<NNN>/   fotos dos cartões, nomeadas pelo ID (A01.jpg; fora do git)
+resultados/entrada/                         caixa de entrada das fotos, como saem do celular
+```
+
+- Transcrição: o Claude lê as fotos dos cartões, confere com o gabarito e grava o CSV. A nota vale o que o **gabarito** diz; os ✓/✗ e a nota escritos pelos alunos (autocorreção) não entram, pois têm erros.
+- `python3 scripts/resultados.py provas/<sigla>/<unidade>/NNN.md`: nota de cada aluno e acerto por pergunta (ID do estudo).
+- `python3 scripts/painel.py`: gera `resultados/painel.html`, página local de análise (contém nomes: não publicar). Com menos de 15 respondentes por prova, a taxa por pergunta é sinalizada como "poucos dados".
+
 ## Fluxo de qualidade
 
 1. O Claude escreve o estudo com `status: rascunho`.

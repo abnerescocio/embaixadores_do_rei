@@ -2,9 +2,9 @@
 """Gera resultados/painel.html: página única (sem internet) para analisar os resultados das provas.
 
 Uso:
-    python3 scripts/painel.py        # lê resultados/<sigla>/<unidade>/<NNN>.csv e escreve resultados/painel.html
+    python3 scripts/painel.py        # lê resultados/alunos.csv e resultados/<sigla>/<unidade>/<NNN>.csv e escreve resultados/painel.html
 
-Mostra, por prova, a nota de cada aluno e o acerto por pergunta (ID do estudo, enunciado, alternativa
+Mostra, por prova (acerto por pergunta só com a 1ª tentativa de cada aluno), a nota de cada aluno e o acerto por pergunta (ID do estudo, enunciado, alternativa
 mais marcada). Abaixo de MIN_RESPOSTAS respondentes a taxa é sinalizada como "poucos dados".
 Os dados ficam embutidos na página (contém nomes: não publicar).
 """
@@ -22,6 +22,8 @@ MIN_RESPOSTAS = 15
 
 
 def carregar():
+    arq_alunos = RAIZ / "resultados" / "alunos.csv"
+    nomes = {a["id"]: a["nome"] for a in csv.DictReader(arq_alunos.open(encoding="utf-8"))} if arq_alunos.exists() else {}
     provas = []
     for arq in sorted((RAIZ / "resultados").glob("*/*/*.csv")):
         sigla, unidade, num = arq.parent.parent.name, arq.parent.name, arq.stem
@@ -37,7 +39,7 @@ def carregar():
             resp = re.sub(r'\s', '', a["respostas"]).upper()
             if len(resp) != len(questoes) or set(resp) - set("ABCD-"):
                 sys.exit(f"{arq.name}: respostas inválidas para {a['aluno']}: {resp!r}")
-            alunos.append({"nome": a["aluno"], "resp": resp})
+            alunos.append({"id": a["aluno"], "tent": int(a.get("tentativa") or 1), "nome": nomes.get(a["aluno"], a["aluno"]), "resp": resp})
         provas.append({
             "id": f"{sigla}/{unidade}/{num}", "sigla": sigla, "unidade": unidade, "num": num,
             "certas": certas, "alunos": alunos,
@@ -78,28 +80,28 @@ tr:last-child td{border-bottom:0}.num{text-align:right;font-variant-numeric:tabu
 <script>
 const DADOS = __DADOS__, MIN = __MIN__;
 const sel = document.getElementById('sel'), app = document.getElementById('app');
-DADOS.forEach((p, i) => sel.add(new Option(`${p.sigla.toUpperCase()} · ${p.unidade} · nº ${p.num} (${p.alunos.length} aluno${p.alunos.length==1?'':'s'})`, i)));
+DADOS.forEach((p, i) => sel.add(new Option(`${p.sigla.toUpperCase()} · ${p.unidade} · nº ${p.num} (${new Set(p.alunos.map(a=>a.id)).size} aluno${new Set(p.alunos.map(a=>a.id)).size==1?'':'s'})`, i)));
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let ordemQ = 'n', ordemA = 'nota';
 function render() {
   const p = DADOS[sel.value]; if (!p) { app.innerHTML = '<p>Nenhum resultado em resultados/.</p>'; return; }
-  const n = p.alunos.length, nq = p.questoes.length;
-  const notas = p.alunos.map(a => ({nome: a.nome, nota: a.resp.split('').filter((r, i) => r === p.certas[i]).length, resp: a.resp}));
-  const media = notas.reduce((s, a) => s + a.nota, 0) / n;
+  const n = new Set(p.alunos.map(a => a.id)).size, nq = p.questoes.length, prim = p.alunos.filter(a => a.tent == 1), np = prim.length;
+  const notas = p.alunos.map(a => ({tent: a.tent, nome: a.nome + (a.tent > 1 ? ` (tentativa ${a.tent})` : ''), nota: a.resp.split('').filter((r, i) => r === p.certas[i]).length, resp: a.resp}));
+  const media = notas.filter(a => a.tent == 1).reduce((s, a) => s + a.nota, 0) / np;
   const qs = p.questoes.map((q, i) => {
-    const cont = {A:0,B:0,C:0,D:0,'-':0}; p.alunos.forEach(a => cont[a.resp[i]]++);
+    const cont = {A:0,B:0,C:0,D:0,'-':0}; prim.forEach(a => cont[a.resp[i]]++);
     const ac = cont[p.certas[i]];
     const top = Object.entries(cont).filter(([l]) => l != p.certas[i] && l != '-').sort((a, b) => b[1] - a[1])[0];
-    return {n: i + 1, ...q, ac, taxa: ac / n, certa: p.certas[i], errMais: top && top[1] ? `${top[0]} (${top[1]})` : '—'};
+    return {n: i + 1, ...q, ac, taxa: ac / np, certa: p.certas[i], errMais: top && top[1] ? `${top[0]} (${top[1]})` : '—'};
   });
-  const poucos = n < MIN;
+  const poucos = np < MIN;
   const dif = [...qs].sort((a, b) => a.taxa - b.taxa)[0];
   qs.sort((a, b) => ordemQ == 'taxa' ? a.taxa - b.taxa || a.n - b.n : a.n - b.n);
   notas.sort((a, b) => ordemA == 'nome' ? a.nome.localeCompare(b.nome) : b.nota - a.nota);
   app.innerHTML = `
   <div class="cards">
     <div class="card"><b>${n}</b><span>aluno${n==1?'':'s'}</span></div>
-    <div class="card"><b>${media.toFixed(1)}/${nq}</b><span>média da turma</span></div>
+    <div class="card"><b>${media.toFixed(1)}/${nq}</b><span>média da turma (1ª tentativa)</span></div>
     <div class="card"><b>${Math.max(...notas.map(a=>a.nota))}/${nq}</b><span>maior nota</span></div>
     <div class="card"><b>${Math.min(...notas.map(a=>a.nota))}/${nq}</b><span>menor nota</span></div>
   </div>
@@ -112,7 +114,7 @@ function render() {
   <div class="wrap"><table><tr><th data-q="n">#</th><th>ID</th><th>Pergunta</th><th>Certa</th><th data-q="taxa" class="num">Acerto</th><th>Mais marcada errada</th></tr>
   ${qs.map(q => `<tr><td class="num">${q.n}</td><td class="num mut">${q.id}</td><td>${esc(q.enunciado)}<div class="mut"><small>${esc(q.fonte)}</small></div></td>
    <td><span class="chip">${q.certa}</span></td>
-   <td class="num">${q.ac}/${n}${poucos ? '' : ' · ' + Math.round(q.taxa * 100) + '%'}<div class="bar ${q.taxa < .5 ? 'low' : ''}"><i style="width:${q.taxa * 100}%"></i></div></td>
+   <td class="num">${q.ac}/${np}${poucos ? '' : ' · ' + Math.round(q.taxa * 100) + '%'}<div class="bar ${q.taxa < .5 ? 'low' : ''}"><i style="width:${q.taxa * 100}%"></i></div></td>
    <td class="mut">${q.errMais}</td></tr>`).join('')}</table></div>`;
   app.querySelectorAll('th[data-q]').forEach(t => t.onclick = () => { ordemQ = t.dataset.q; render(); });
   app.querySelectorAll('th[data-a]').forEach(t => t.onclick = () => { ordemA = t.dataset.a; render(); });

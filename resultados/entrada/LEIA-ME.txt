@@ -4,6 +4,6 @@ Jogue aqui as fotos exatamente como saem do celular (nome original, ex.: 2026100
 Depois peça ao Claude: "processe as fotos de resultados/entrada".
 
 Ele lê cada cartão, confere com os ✓/✗ à mão, registra no CSV da prova e move a foto para
-resultados/fotos/<sigla>/<unidade>/<NNN>/, renomeada com o nome do aluno.
+resultados/fotos/<sigla>/<unidade>/<NNN>/, renomeada com o ID do aluno (ex.: A01.jpg). Os IDs e nomes ficam em resultados/alunos.csv.
 
 Dica: fotografe só a página do cartão-resposta (página 2), de cima, com boa luz.

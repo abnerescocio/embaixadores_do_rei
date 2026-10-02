@@ -29,6 +29,10 @@ docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
 3b. Controle de uso: `python3 scripts/ids.py <estudo.md>` numera perguntas novas (`I: NNN`, nunca renumerar; o ID é o número exibido no PDF do estudo e aparece como `Estudo #NN` no gabarito, nunca na prova do aluno); `python3 scripts/cobertura.py <estudo.md> [--livres|--usos]` mostra o que já caiu em provas. Ao montar prova nova, priorizar as perguntas nunca usadas e distribuir por seção. Níveis (essencial/normal/detalhe) e dificuldade por resultado de alunos são etapas futuras.
 4. PDFs em `saida/` são descartáveis: corrigir = editar o `.md` e regerar (o PDF do estudo é sobrescrito; regerar uma prova sobrescreve o PDF dela; o número vem do nome do arquivo-fonte).
 
+## Resultados dos alunos
+
+`resultados/` guarda `alunos.csv` (ID `A01`… → nome), um CSV por prova (`resultados/<sigla>/<unidade>/<NNN>.csv`: `aluno,foto,respostas`) e as fotos dos cartões (`resultados/fotos/`, fora do git; caixa de entrada em `resultados/entrada/`). Ao processar fotos: ler as 20 letras, conferir com o gabarito (a autocorreção ✓/✗ dos alunos e a nota que escrevem têm erros e não valem), gravar o CSV, mover a foto para `fotos/.../<ID>.jpg`, rodar `python3 scripts/painel.py`. Dificuldade por pergunta só é conclusiva com ≥15 respondentes; não alterar estudos por causa dela.
+
 ## Material de estudo
 
 Apenas **pergunta e resposta curta**, para decorar. Nada de resumo ou resposta longa.
