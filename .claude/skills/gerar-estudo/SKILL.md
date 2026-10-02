@@ -5,7 +5,7 @@ description: Gera o material de estudo (perguntas e respostas curtas, para decor
 
 # Gerar estudo
 
-Produz `estudos/<disciplina>/<unidade>.md` e o PDF em `saida/<disciplina>/<unidade>/<unidade>-estudo.pdf` (nome fixo: o estudo é canônico e o PDF é sobrescrito ao regerar).
+Produz `estudos/<disciplina>/<unidade>.md` e o PDF em `saida/estudos/<disc>_<unidade>.pdf` (ex.: `cgo_escudeiro.pdf`; nome fixo: o estudo é canônico e o PDF é sobrescrito ao regerar).
 
 ## Entrada
 

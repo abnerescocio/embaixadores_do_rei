@@ -5,10 +5,10 @@ Uso:
     python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md
     python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md
 
-Saída (saida/<disciplina>/<unidade>/):
-    estudo -> saida/cgo/escudeiro/escudeiro-estudo.pdf   (canônico: nome fixo, sobrescrito ao regerar)
-    prova  -> saida/cgo/escudeiro/001_escudeiro-prova.pdf (prefixo NNN_ sequencial, nunca sobrescreve)
-              saida/cgo/escudeiro/001_escudeiro-gabarito.pdf
+Saída (duas pastas; o prefixo é a sigla da disciplina, pasta de origem em estudos/ e provas/):
+    estudo -> saida/estudos/cgo_escudeiro.pdf            (canônico: nome fixo, sobrescrito ao regerar)
+    prova  -> saida/provas/cgo_001_escudeiro-prova.pdf    (NNN sequencial por unidade, nunca sobrescreve)
+              saida/provas/cgo_001_escudeiro-gabarito.pdf
 A data de geração aparece dentro do PDF; na prova também o número (subtítulo e rodapé).
 
 Estudo: 2 colunas, fonte fixa (FONTE_ESTUDO), quantas páginas forem necessárias.
@@ -301,10 +301,11 @@ def verificar_prova(meta, questoes):
         print(f"⚠ O estudo {rel} ainda não está marcado como revisado (status: {estudo_meta.get('status', 'sem status')}).")
 
 
-def proximo_numero(pasta, tipo):
-    """Próximo prefixo NNN_ livre para o tipo (estudo ou prova) na pasta."""
-    usados = [int(m.group(1)) for f in pasta.glob(f"*-{tipo}.pdf")
-              if (m := re.match(r'(\d+)_', f.name))]
+def proximo_numero(disciplina, nome):
+    """Próximo NNN livre para as provas da unidade (saida/provas/<disc>_NNN_<unidade>-prova.pdf)."""
+    pasta = SAIDA / "provas"
+    usados = [int(m.group(1)) for f in pasta.glob(f"{disciplina}_*_{nome}-prova.pdf")
+              if (m := re.match(rf'{re.escape(disciplina)}_(\d+)_{re.escape(nome)}-prova\.pdf$', f.name))]
     return f"{max(usados, default=0) + 1:03d}"
 
 
@@ -352,19 +353,19 @@ def main():
     modo, entrada = sys.argv[1], Path(sys.argv[2]).resolve()
     meta, linhas = ler_md(entrada)
     nome = entrada.stem
-    pasta = SAIDA / entrada.parent.name / nome
+    disc = entrada.parent.name  # sigla da disciplina: cgo, cgb, bj, bwah
     hoje = date.today().strftime('%d/%m/%Y')
     if modo == "estudo":
         meta["rotulo"] = hoje  # o estudo é canônico: sem número de geração
     else:
-        num = proximo_numero(pasta, modo)
+        num = proximo_numero(disc, nome)
         meta["rotulo"] = f"nº {num} · {hoje}"
     if modo == "estudo":
         if meta.get("status") != "revisado":
             print(f"⚠ Estudo ainda não revisado (status: {meta.get('status', 'sem status')}).")
         secoes = parse_estudo(linhas)
         typ = typ_estudo(meta, secoes, FONTE_ESTUDO)
-        compilar(typ, pasta / f"{nome}-estudo.pdf")
+        compilar(typ, SAIDA / "estudos" / f"{disc}_{nome}.pdf")
         print(f"  {contar_perguntas(secoes)} perguntas · {contar_paginas(typ)} páginas · "
               f"fonte {FONTE_ESTUDO}pt")
     else:
@@ -373,8 +374,8 @@ def main():
         prova = lambda t: typ_prova(meta, questoes, False, t)
         gabarito = lambda t: typ_prova(meta, questoes, True, t)
         tam = escolher_fonte([prova, gabarito])  # mesma fonte nos dois: gabarito = espelho
-        compilar(prova(tam), pasta / f"{num}_{nome}-prova.pdf")
-        compilar(gabarito(tam), pasta / f"{num}_{nome}-gabarito.pdf")
+        compilar(prova(tam), SAIDA / "provas" / f"{disc}_{num}_{nome}-prova.pdf")
+        compilar(gabarito(tam), SAIDA / "provas" / f"{disc}_{num}_{nome}-gabarito.pdf")
         print(f"  {len(questoes)} questões · fonte {tam}pt")
 
 
