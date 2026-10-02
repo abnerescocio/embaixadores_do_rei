@@ -34,11 +34,11 @@ Tudo começa pela sigla da disciplina, então a ordem alfabética agrupa por dis
 | Tipo | Padrão | Exemplo |
 |---|---|---|
 | Estudo | `saida/estudos/<sigla>_<unidade>.pdf` | `cgo_escudeiro.pdf`, `bj_03-sermao-monte-milagres.pdf` |
-| Prova | `saida/provas/<sigla>_<NNN>_<unidade>-prova.pdf` | `cgo_001_escudeiro-prova.pdf` |
-| Gabarito | `saida/gabaritos/<sigla>_<NNN>_<unidade>-gabarito.pdf` | `cgo_001_escudeiro-gabarito.pdf` |
+| Prova | `saida/provas/<sigla>_<unidade>-prova_<NNN>.pdf` | `cgo_escudeiro-prova_001.pdf` |
+| Gabarito | `saida/gabaritos/<sigla>_<unidade>-gabarito_<NNN>.pdf` | `cgo_escudeiro-gabarito_001.pdf` |
 
 - **Estudo é canônico:** não tem número; o PDF é sobrescrito sempre que o estudo é regerado. Futuramente terá versão e data de alteração dentro do material.
-- **O número da prova vem do arquivo-fonte, não da pasta `saida/`:** `provas/cgo/arauto/002.md` gera `cgo_002_arauto-prova.pdf` e `cgo_002_arauto-gabarito.pdf`. Não existe contador: sigla, unidade e número são lidos do caminho do arquivo. Apagar `saida/` e regerar produz exatamente os mesmos nomes.
+- **O número da prova vem do arquivo-fonte, não da pasta `saida/`:** `provas/cgo/arauto/002.md` gera `cgo_arauto-prova_002.pdf` e `cgo_arauto-gabarito_002.pdf`. Não existe contador: sigla, unidade e número são lidos do caminho do arquivo. Apagar `saida/` e regerar produz exatamente os mesmos nomes.
 - **Prova nova** (questões diferentes da mesma unidade) = arquivo novo com o **próximo número livre** da pasta (`001.md`, `002.md`, `003.md`...). Regerar uma prova existente sobrescreve o PDF dela, porque o conteúdo é o mesmo.
 - **Unidade** é o nome do arquivo Markdown (`escudeiro`, `arauto`, `01-nascimento-infancia`, `genesis`...).
 
@@ -48,7 +48,7 @@ Requisito: [Typst](https://typst.app) instalado (`brew install typst`) e Python 
 
 ```bash
 python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md   # -> saida/estudos/cgo_escudeiro.pdf
-python3 scripts/build_pdf.py prova  provas/cgo/escudeiro/001.md # -> saida/provas/cgo_001_escudeiro-prova.pdf e saida/gabaritos/cgo_001_escudeiro-gabarito.pdf
+python3 scripts/build_pdf.py prova  provas/cgo/escudeiro/001.md # -> saida/provas/cgo_escudeiro-prova_001.pdf e saida/gabaritos/cgo_escudeiro-gabarito_001.pdf
 ```
 
 Também dá para pedir ao Claude com as skills `gerar-estudo` e `gerar-prova`.

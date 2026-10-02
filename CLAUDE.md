@@ -10,8 +10,8 @@ Embaixada: **Embaixada Pastor José Saraiva** — Primeira Igreja Batista em Pot
 docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
                          |
                          v
-                    provas/<disc>/<unidade>/NNN.md ->  saida/provas/<disc>_NNN_<unidade>-prova.pdf
-                                    saida/gabaritos/<disc>_NNN_<unidade>-gabarito.pdf
+                    provas/<disc>/<unidade>/NNN.md ->  saida/provas/<disc>_<unidade>-prova_NNN.pdf
+                                    saida/gabaritos/<disc>_<unidade>-gabarito_NNN.pdf
 ```
 
 - Skills: `gerar-estudo` e `gerar-prova` (em `.claude/skills/`). O Claude escreve o Markdown; o PDF é montado de forma determinística por `scripts/build_pdf.py` (Python 3 stdlib + Typst).
@@ -19,7 +19,7 @@ docs/ (fontes)  ->  estudos/*.md  ->  saida/estudos/<disc>_<unidade>.pdf
 - A prova nasce do **estudo**, não das fontes. A prova é **sempre só de marcar (múltipla escolha A–D)** e termina com um cartão-resposta de bolinhas; o gabarito é o espelho exato da prova com as respostas marcadas.
 - **Estudo:** 2 colunas, fonte 11pt, quantas páginas precisar. **Prova e gabarito:** impressão frente e verso, sempre 2 páginas em 2 colunas (fonte automática, até 10pt); sempre 20 questões; página 1 = questões, página 2 = cartão-resposta.
 - **Referências obrigatórias:** toda pergunta do estudo e toda questão da prova tem `F:` (obra/capítulo/página ou livro bíblico/capítulo/versículo). Aparecem ao lado do enunciado, no estudo e no gabarito (nunca na prova do aluno).
-- `saida/` é gerado; não editar à mão. Três pastas (`estudos`, `provas`, `gabaritos`), com os PDFs de cada tipo juntos e a sigla da disciplina como prefixo: `saida/estudos/<disc>_<unidade>.pdf` (estudo canônico, nome fixo, sobrescrito ao regerar) `saida/provas/<disc>_NNN_<unidade>-prova.pdf` e `saida/gabaritos/<disc>_NNN_<unidade>-gabarito.pdf` (NNN = nome do arquivo-fonte `provas/<disc>/<unidade>/NNN.md`; sem contador e sem olhar `saida/`; prova nova = próximo número livre da pasta). Detalhes no `README.md`.
+- `saida/` é gerado; não editar à mão. Três pastas (`estudos`, `provas`, `gabaritos`), com os PDFs de cada tipo juntos e a sigla da disciplina como prefixo: `saida/estudos/<disc>_<unidade>.pdf` (estudo canônico, nome fixo, sobrescrito ao regerar) `saida/provas/<disc>_<unidade>-prova_NNN.pdf` e `saida/gabaritos/<disc>_<unidade>-gabarito_NNN.pdf` (NNN = nome do arquivo-fonte `provas/<disc>/<unidade>/NNN.md`; sem contador e sem olhar `saida/`; prova nova = próximo número livre da pasta). Detalhes no `README.md`.
 
 ## Fluxo de qualidade
 

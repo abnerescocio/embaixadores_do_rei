@@ -7,8 +7,8 @@ Uso:
 
 Saída (três pastas; o prefixo é a sigla da disciplina):
     estudo   -> saida/estudos/cgo_escudeiro.pdf              (canônico: nome fixo, sobrescrito ao regerar)
-    prova    -> saida/provas/cgo_001_escudeiro-prova.pdf
-    gabarito -> saida/gabaritos/cgo_001_escudeiro-gabarito.pdf (mesmo número da prova)
+    prova    -> saida/provas/cgo_escudeiro-prova_001.pdf
+    gabarito -> saida/gabaritos/cgo_escudeiro-gabarito_001.pdf (mesmo número da prova)
 Sigla, unidade e número vêm do CAMINHO do arquivo-fonte, sem contador e sem olhar a pasta saida/:
     estudos/<sigla>/<unidade>.md         -> estudo
     provas/<sigla>/<unidade>/<NNN>.md    -> prova NNN (o número é o nome do arquivo; regerar a mesma
@@ -371,8 +371,8 @@ def main():
         prova = lambda t: typ_prova(meta, questoes, False, t)
         gabarito = lambda t: typ_prova(meta, questoes, True, t)
         tam = escolher_fonte([prova, gabarito])  # mesma fonte nos dois: gabarito = espelho
-        compilar(prova(tam), SAIDA / "provas" / f"{disc}_{num}_{nome}-prova.pdf")
-        compilar(gabarito(tam), SAIDA / "gabaritos" / f"{disc}_{num}_{nome}-gabarito.pdf")
+        compilar(prova(tam), SAIDA / "provas" / f"{disc}_{nome}-prova_{num}.pdf")
+        compilar(gabarito(tam), SAIDA / "gabaritos" / f"{disc}_{nome}-gabarito_{num}.pdf")
         print(f"  {len(questoes)} questões · fonte {tam}pt")
 
 
