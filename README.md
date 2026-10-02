@@ -21,7 +21,8 @@ estudos/<sigla>/       estudos em Markdown  (a fonte da verdade do material)
 provas/<sigla>/        provas em Markdown   (nascem do estudo)
 saida/                 PDFs gerados (não editar à mão)
 ├── estudos/           todos os PDFs de estudo, juntos
-└── provas/            todos os PDFs de prova e gabarito, juntos
+├── provas/            todos os PDFs de prova, juntos (o que o aluno recebe)
+└── gabaritos/         todos os PDFs de gabarito, juntos (só para o aplicador)
 scripts/               ferramentas (build_pdf.py, biblia_fonte.py, livro_fonte.py)
 .claude/skills/        skills gerar-estudo e gerar-prova
 ```
@@ -34,7 +35,7 @@ Tudo começa pela sigla da disciplina, então a ordem alfabética agrupa por dis
 |---|---|---|
 | Estudo | `saida/estudos/<sigla>_<unidade>.pdf` | `cgo_escudeiro.pdf`, `bj_03-sermao-monte-milagres.pdf` |
 | Prova | `saida/provas/<sigla>_<NNN>_<unidade>-prova.pdf` | `cgo_001_escudeiro-prova.pdf` |
-| Gabarito | `saida/provas/<sigla>_<NNN>_<unidade>-gabarito.pdf` | `cgo_001_escudeiro-gabarito.pdf` |
+| Gabarito | `saida/gabaritos/<sigla>_<NNN>_<unidade>-gabarito.pdf` | `cgo_001_escudeiro-gabarito.pdf` |
 
 - **Estudo é canônico:** não tem número; o PDF é sobrescrito sempre que o estudo é regerado. Futuramente terá versão e data de alteração dentro do material.
 - **Prova guarda as versões:** `NNN` é sequencial **por unidade** (`cgo_001_escudeiro`, `cgo_002_escudeiro`...) e nunca sobrescreve. A prova e o gabarito da mesma geração dividem o número, que também aparece dentro do PDF, junto com a data.
@@ -46,7 +47,7 @@ Requisito: [Typst](https://typst.app) instalado (`brew install typst`) e Python 
 
 ```bash
 python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md   # -> saida/estudos/cgo_escudeiro.pdf
-python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md    # -> saida/provas/cgo_001_escudeiro-prova.pdf e -gabarito.pdf
+python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md    # -> saida/provas/cgo_001_escudeiro-prova.pdf e saida/gabaritos/cgo_001_escudeiro-gabarito.pdf
 ```
 
 Também dá para pedir ao Claude com as skills `gerar-estudo` e `gerar-prova`.

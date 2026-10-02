@@ -5,10 +5,10 @@ Uso:
     python3 scripts/build_pdf.py estudo estudos/cgo/escudeiro.md
     python3 scripts/build_pdf.py prova  provas/cgo/escudeiro.md
 
-Saída (duas pastas; o prefixo é a sigla da disciplina, pasta de origem em estudos/ e provas/):
-    estudo -> saida/estudos/cgo_escudeiro.pdf            (canônico: nome fixo, sobrescrito ao regerar)
-    prova  -> saida/provas/cgo_001_escudeiro-prova.pdf    (NNN sequencial por unidade, nunca sobrescreve)
-              saida/provas/cgo_001_escudeiro-gabarito.pdf
+Saída (três pastas; o prefixo é a sigla da disciplina, pasta de origem em estudos/ e provas/):
+    estudo   -> saida/estudos/cgo_escudeiro.pdf              (canônico: nome fixo, sobrescrito ao regerar)
+    prova    -> saida/provas/cgo_001_escudeiro-prova.pdf      (NNN sequencial por unidade, nunca sobrescreve)
+    gabarito -> saida/gabaritos/cgo_001_escudeiro-gabarito.pdf (mesmo número da prova)
 A data de geração aparece dentro do PDF; na prova também o número (subtítulo e rodapé).
 
 Estudo: 2 colunas, fonte fixa (FONTE_ESTUDO), quantas páginas forem necessárias.
@@ -375,7 +375,7 @@ def main():
         gabarito = lambda t: typ_prova(meta, questoes, True, t)
         tam = escolher_fonte([prova, gabarito])  # mesma fonte nos dois: gabarito = espelho
         compilar(prova(tam), SAIDA / "provas" / f"{disc}_{num}_{nome}-prova.pdf")
-        compilar(gabarito(tam), SAIDA / "provas" / f"{disc}_{num}_{nome}-gabarito.pdf")
+        compilar(gabarito(tam), SAIDA / "gabaritos" / f"{disc}_{num}_{nome}-gabarito.pdf")
         print(f"  {len(questoes)} questões · fonte {tam}pt")
 
 
