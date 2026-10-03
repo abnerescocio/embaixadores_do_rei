@@ -1,0 +1,236 @@
+import csv, json
+B='/Users/abnerescocio/Dev/embaixadores_do_rei/olimpiadas_estaduais_dcer/2026/saida/'
+rows=list(csv.DictReader(open(B+'delegacao_departamento_oeer2026.csv',encoding='utf-8-sig')))
+
+CSS='''
+:root{--bg:#f4f6f9;--card:#ffffff;--ink:#1b2333;--mut:#5f6b80;--line:#dde2ea;--soft:#eef1f6;--js:#1f5fd6;--w:#1a7f43;--jb:#b8480f;--warn:#9a5b00;--warnbg:#fdf0cf;--bad:#b3261e;--badbg:#fbe3e1;--ok:#17653a;--okbg:#dcf3e4;--up:#6b3fb5;--upbg:#ece3fa;--btn:#1b2333;--btnink:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e131d;--card:#161d2b;--ink:#e6eaf3;--mut:#9aa6bb;--line:#29324a;--soft:#1d2638;--js:#7aa7ff;--w:#58d68d;--jb:#ff9a5c;--warn:#f5c35b;--warnbg:#3a2e0d;--bad:#ff8a80;--badbg:#401816;--ok:#8ae0ad;--okbg:#0f3020;--up:#c3a3ff;--upbg:#2b2047;--btn:#e6eaf3;--btnink:#0e131d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e131d;--card:#161d2b;--ink:#e6eaf3;--mut:#9aa6bb;--line:#29324a;--soft:#1d2638;--js:#7aa7ff;--w:#58d68d;--jb:#ff9a5c;--warn:#f5c35b;--warnbg:#3a2e0d;--bad:#ff8a80;--badbg:#401816;--ok:#8ae0ad;--okbg:#0f3020;--up:#c3a3ff;--upbg:#2b2047;--btn:#e6eaf3;--btnink:#0e131d;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:16px 48px}
+.top{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+h1{margin:0;font-size:22px;text-wrap:balance}.sub{margin:4px 0 0;color:var(--mut)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--btn);background:var(--btn);color:var(--btnink);padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit;font-weight:600}
+.btn.sec{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:focus-visible,nav button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--js);outline-offset:2px}
+#msg{color:var(--mut);font-size:13px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer;font:inherit}
+nav button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;align-items:center}
+.filters select,.filters input{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;max-width:100%}
+.filters label{color:var(--mut);font-size:13px}
+.legend{display:flex;gap:10px 14px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin:0 0 12px;align-items:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card .n{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}.card .l{color:var(--mut);font-size:13px}
+.card.warn{border-color:var(--warn)}.card.bad{border-color:var(--bad)}.card.ok{border-color:var(--ok)}
+h2{font-size:14px;margin:22px 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;background:var(--soft)}
+td.k{font-weight:600;min-width:170px}td.k small{display:block;color:var(--mut);font-weight:400}
+.chip{display:inline-flex;align-items:center;gap:4px;margin:2px 4px 2px 0;padding:2px 9px;border-radius:999px;font-size:13px;border:1.5px solid var(--c);color:var(--ink);cursor:default}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+.chip.upc{background:var(--upbg)}
+.up{color:var(--up);font-weight:700}
+.js{--c:var(--js)}.w{--c:var(--w)}.jb{--c:var(--jb)}
+.cnt{display:inline-block;font-size:12px;border-radius:6px;padding:1px 7px;margin-left:4px;background:var(--okbg);color:var(--ok);font-variant-numeric:tabular-nums}
+.cnt.full{background:var(--warnbg);color:var(--warn)}.cnt.over,.cnt.under{background:var(--badbg);color:var(--bad)}
+.empty{color:var(--mut);font-size:13px}
+.blk{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--line) 6px 7px);color:var(--mut);font-size:12px;font-style:italic;min-width:110px}
+.dp{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:1px 4px;margin:2px 4px 2px 0;background:var(--soft)}
+.duplas,.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px;margin:10px 0}
+.dcard h3{margin:0 0 6px;font-size:14px}.dcard .p{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.dcard .amp{color:var(--mut);font-weight:700}.dcard .m{color:var(--mut);font-size:12px;margin-top:6px}
+.er h3{margin:0 0 4px;font-size:16px;overflow-wrap:anywhere}.er .m{color:var(--mut);font-size:13px;margin-bottom:6px}
+.er ul{list-style:none;margin:0;padding:0}.er li{padding:5px 0;border-top:1px solid var(--line);font-size:14px}
+.badge{font-size:11px;border-radius:5px;padding:1px 6px;margin-left:6px;text-transform:uppercase;letter-spacing:.03em}
+.b-atencao{background:var(--badbg);color:var(--bad)}.b-up{background:var(--upbg);color:var(--up)}
+.obs{display:block;color:var(--mut);font-size:12px}
+.uplist{display:flex;flex-direction:column;gap:6px;margin:0 0 8px}
+.cob{margin:8px 0 0;padding-left:18px;font-size:13px}.cob li{margin:2px 0}.cobcards{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.printonly{display:none}
+@media print{
+ :root{--bg:#fff;--card:#fff;--ink:#000;--mut:#444;--line:#bbb;--soft:#f0f0f0}
+ body{background:#fff;color:#000;font-size:11px}
+ .noprint,nav,.filters,.actions,.legend{display:none!important}
+ .printonly{display:block}
+ .wrap{padding:0;max-width:none}
+ .tw{overflow:visible;border-color:#999}table{min-width:0}
+ tr,.card{break-inside:avoid}
+ h2{break-after:avoid}.pg{break-before:page}
+ .chip{border-width:1px}
+}
+@media (max-width:700px){td.k{min-width:120px}th,td{padding:6px}}
+'''
+
+JS=r'''
+const ROWS=__DATA__;
+const PUBLISH=__PUBLISH__;
+const DEL={'Embaixada Pastor José Saraiva':['js','José Saraiva'],'Embaixada Waldemiro Tymchak':['w','Waldemiro Tymchak'],'Embaixada Jeff Brawner':['jb','Jeff Brawner']};
+const PART=['da','de','do','das','dos'];
+const short=n=>n.split(' ').filter(x=>!PART.includes(x.toLowerCase())).slice(0,2).join(' ');
+const CATS=['Júnior','Adolescente','Juvenil'];
+const T3=CATS;
+const ORD_BIB=['CGB','CGO','MB','SER','BJ','EB','VRB','PRE'];
+const NAMES={CGB:'Conhecimentos Gerais da Bíblia',CGO:'Conhecimentos Gerais da Organização ER',MB:'Montagem Bíblica',SER:'Sempre Embaixador – Biografia do WAH',BJ:'Biografia de Jesus',EB:'Esgrima Bíblica',VRB:'Debate de Versículos com Referência Bíblica',PRE:'Pregador do Evangelho'};
+const SEC=[['Atletismo',['Atletismo · 50 metros','Atletismo · Revezamento 4x50 metros','Atletismo · 100 metros','Atletismo · Salto em Distância','Atletismo · 1500 metros','Atletismo · Revezamento 4x100 metros']],
+ ['Natação',['Natação · 50 metros nado livre','Natação · 50 metros nado costas','Natação · 100 metros nado livre','Natação · Revezamento 4x25 metros nado livre']],
+ ['Jogos de Salão',['Jogos de Salão · Xadrez','Jogos de Salão · Damas','Jogos de Salão · Dominó','Jogos de Salão · Tênis de Mesa']],
+ ['Futsal',['Jogos Coletivos · Futsal']],['Vôlei',['Jogos Coletivos · Vôlei']]];
+const AV={'Atletismo · 50 metros':['Júnior'],'Atletismo · Revezamento 4x50 metros':['Júnior'],'Natação · 50 metros nado costas':['Única'],'Atletismo · 100 metros':['Adolescente','Juvenil'],'Atletismo · Salto em Distância':T3,'Atletismo · 1500 metros':['Única'],'Atletismo · Revezamento 4x100 metros':['Única'],
+ 'Natação · 50 metros nado livre':['Júnior'],'Natação · 100 metros nado livre':['Única'],'Natação · Revezamento 4x25 metros nado livre':['Única'],
+ 'Jogos de Salão · Xadrez':T3,'Jogos de Salão · Damas':T3,'Jogos de Salão · Dominó':T3,'Jogos de Salão · Tênis de Mesa':T3,'Jogos Coletivos · Futsal':T3,'Jogos Coletivos · Vôlei':['Única']};
+const blk=(k,c)=>{const a=AV[k];if(!a||a.includes(c))return null;
+ if(c==='Júnior')return 'Sem categoria Júnior · pode disputar acima (arts. 19 e 31)';
+ if(c==='Única')return 'Prova por categoria';
+ return a.includes('Única')?'Categoria única Adol./Juvenil':'Não disputada nesta categoria'};
+const state={tab:'resumo',del:'',cat:'',q:''};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const keyOf=r=>r.modulo==='Bíblico'?r.sigla:r.competicao+' · '+r.prova;
+const colOf=r=>r.categoria_disputa.startsWith('Única')?'Única':r.categoria_disputa;
+const isUp=r=>r.sobe_categoria==='Sim';
+const labOf=r=>r.modulo==='Bíblico'?(r.sigla+' · '+r.competicao):(r.competicao+' · '+r.prova);
+const chip=r=>{const d=DEL[r.delegacao];const up=isUp(r);
+ const tip=[r.nome,r.categoria+' · '+d[1],up?'Compete acima da própria categoria ('+r.categoria_disputa+')':'',r.observacao&&!up?r.observacao:''].filter(Boolean).join('\n');
+ return `<span class="chip ${d[0]}${up?' upc':''}" title="${esc(tip)}"><i></i>${up?'<b class="up" aria-label="sobe de categoria">↑</b>':''}${esc(short(r.nome))}</span>`};
+const filt=r=>(!state.del||r.delegacao===state.del)&&(!state.cat||r.categoria===state.cat)&&(!state.q||(r.nome+' '+r.prova+' '+r.sigla+' '+r.competicao).toLowerCase().includes(state.q.toLowerCase()));
+const LIM={Futsal:[5,10],'Vôlei':[6,12]};
+function cnt(items,r0){
+ const n=items.length;let lim=2,lo=0;
+ if(r0.prova==='Dominó')lim=4;else if(r0.prova==='Futsal'||r0.prova==='Vôlei'){[lo,lim]=LIM[r0.prova]}else if(r0.tipo.startsWith('coletiva (revez'))lim=lo=4;
+ const c=n>lim?'over':n<lo?'under':n===lim?'full':'';
+ return `<span class="cnt ${c}">${n}/${lim===lo?lim:(lo?lo+'–'+lim:lim)}</span>`}
+function duplas(){
+ const rs=ROWS.filter(r=>r.prova==='Dominó'&&r.dupla&&filt(r));
+ const g={};rs.forEach(r=>{(g[r.dupla]??=[]).push(r)});
+ const ks=Object.keys(g).sort();if(!ks.length)return '';
+ return '<h2>Duplas de Dominó</h2><div class="duplas">'+ks.map(k=>{const p=g[k];
+  const nomes=p.map((r,i)=>(i?'<span class="amp">+</span>':'')+chip(r)).join('');
+  return `<div class="card dcard"><h3>${esc(k.replace(' · ',' – '))}</h3><div class="p">${nomes}</div><div class="m">${p.length<2?'Falta o parceiro da dupla':[...new Set(p.map(r=>DEL[r.delegacao][1]))].join(' + ')}</div></div>`}).join('')+'</div>'}
+function comp(){
+ const groups={};ROWS.filter(filt).forEach(r=>{(groups[keyOf(r)]??=[]).push(r)});
+ const tbl=(title,ks)=>{
+  const body=ks.map(k=>{const g=groups[k]||[];const nm=NAMES[k];
+   const cols=['Júnior','Adolescente','Juvenil','Única'].map(c=>{const it=g.filter(r=>colOf(r)===c);
+     const b=blk(k,c);if(b&&!it.length)return `<td class="blk" title="${esc(b)}">${esc(b)}</td>`;
+     const inner=k==='Jogos de Salão · Dominó'?[...new Set(it.map(r=>r.dupla))].map(d=>`<span class="dp">${it.filter(r=>r.dupla===d).map(chip).join('')}</span>`).join(''):it.map(chip).join('');
+     return `<td>${it.length?inner+cnt(it,it[0]):'<span class="empty">vaga livre</span>'}</td>`}).join('');
+   return `<tr><td class="k">${esc(k)}${nm?`<small>${esc(nm)}</small>`:''}</td>${cols}</tr>`}).join('');
+  return `<h2>${title}</h2><div class="tw"><table><thead><tr><th>Competição</th><th>Júnior</th><th>Adolescente</th><th>Juvenil</th><th>Categoria única</th></tr></thead><tbody>${body}</tbody></table></div>`};
+ return tbl('Módulo Bíblico',ORD_BIB)+SEC.map(([t,ks])=>tbl(t,ks)+(t==='Jogos de Salão'?duplas():'')).join('')}
+function ers(){
+ const people={};ROWS.forEach(r=>{(people[r.nome]??=[]).push(r)});
+ const out=Object.keys(people).filter(n=>people[n].some(filt)).sort((a,b)=>DEL[people[a][0].delegacao][1].localeCompare(DEL[people[b][0].delegacao][1])||CATS.indexOf(people[b][0].categoria)-CATS.indexOf(people[a][0].categoria)||a.localeCompare(b));
+ return '<div class="grid">'+out.map(n=>{const p=people[n],r0=p[0],d=DEL[r0.delegacao];const up=p.some(isUp);
+  return `<div class="card er"><h3><span class="chip ${d[0]}" style="margin:0 6px 0 0"><i></i>${d[1]}</span>${esc(n)}</h3>
+  <div class="m">${esc(r0.categoria)} · ${r0.idade_em_11_10_2026} anos${r0.nascimento?' · '+r0.nascimento.split('-').reverse().join('/'):''} · ${p.length} modalidade${p.length===1?'':'s'}${up?' <span class="badge b-up">↑ compete acima da categoria</span>':''}</div>
+  <ul>${p.filter(filt).map(r=>{const bad=r.situacao==='ATENÇÃO';
+   return `<li>${esc(labOf(r))}${isUp(r)?`<span class="badge b-up">↑ ${esc(r.categoria_disputa)}</span>`:''}${bad?'<span class="badge b-atencao">atenção</span>':''}${r.dupla?`<span class="obs">${esc(r.dupla.replace(' · ',' – '))}</span>`:''}${r.observacao&&!isUp(r)?`<span class="obs">${esc(r.observacao)}</span>`:''}</li>`}).join('')}</ul></div>`}).join('')+'</div>'}
+function pend(){
+ const rs=ROWS.filter(r=>(r.situacao==='PENDENTE'||r.situacao==='ATENÇÃO')&&filt(r));
+ if(!rs.length)return '<p class="empty">Nenhuma pendência com esses filtros.</p>';
+ return '<div class="tw"><table><thead><tr><th>Embaixador do Rei</th><th>Competição</th><th>Situação</th><th>Detalhe</th></tr></thead><tbody>'+rs.map(r=>`<tr><td>${chip(r)}</td><td>${esc(labOf(r))}<span class="obs">${esc(r.categoria)}</span></td><td><span class="badge ${r.situacao==='ATENÇÃO'?'b-atencao':'b-up'}" style="margin:0">${r.situacao.toLowerCase()}</span></td><td>${esc(r.observacao)}</td></tr>`).join('')+'</tbody></table></div>'}
+function participantes(){
+ const people={};ROWS.filter(filt).forEach(r=>{(people[r.nome]??=[]).push(r)});
+ const names=Object.keys(people).sort((a,b)=>Object.keys(DEL).indexOf(people[a][0].delegacao)-Object.keys(DEL).indexOf(people[b][0].delegacao)||CATS.indexOf(people[b][0].categoria)-CATS.indexOf(people[a][0].categoria)||a.localeCompare(b));
+ const all=ROWS.reduce((m,r)=>(m[r.nome]=(m[r.nome]||0)+1,m),{});
+ return `<div class="tw"><table><thead><tr><th>Nº</th><th>Nome completo</th><th>Nascimento</th><th>Idade</th><th>Categoria</th><th>Embaixada</th><th>Modalidades</th></tr></thead><tbody>`+names.map((n,i)=>{const r=people[n][0];
+  return `<tr><td>${i+1}</td><td><b>${esc(n)}</b></td><td>${r.nascimento?esc(r.nascimento.split('-').reverse().join('/')):''}</td><td>${r.idade_em_11_10_2026}</td><td>${esc(r.categoria)}${people[n].some(isUp)?' <b class="up" title="Compete acima da própria categoria">↑</b>':''}</td><td>${chip(r).replace(/<span class="chip[^>]*>.*?<\/span>/,`<span class="chip ${DEL[r.delegacao][0]}"><i></i>${esc(r.delegacao.replace('Embaixada ',''))}</span>`)}</td><td>${all[n]}</td></tr>`}).join('')+`</tbody></table></div><p class="empty">Idade em 11/10/2026 (art. 16). ↑ = compete acima da própria categoria.</p>`}
+function cobertura(){
+ const zero=[],parc=[];
+ const cell=(k,c)=>ROWS.filter(r=>keyOf(r)===k&&colOf(r)===c);
+ const lbl=k=>NAMES[k]?k+' · '+NAMES[k]:k;
+ const cl=c=>c==='Única'?'categoria única':c;
+ ORD_BIB.forEach(k=>CATS.forEach(c=>{const n=cell(k,c).length;if(n===0)zero.push(lbl(k)+' — '+cl(c));else if(n===1)parc.push(lbl(k)+' — '+cl(c)+' ('+short(cell(k,c)[0].nome)+')')}));
+ SEC.forEach(([t,ks])=>ks.forEach(k=>{
+  if(/Revezamento|Dominó|Futsal|Vôlei/.test(k)){if(!ROWS.some(r=>keyOf(r)===k))zero.push(k+' — '+(AV[k].length===1&&AV[k][0]!=='Única'?AV[k][0]:'todas as categorias'));return}
+  AV[k].forEach(c=>{const n=cell(k,c).length;if(n===0)zero.push(k+' — '+cl(c));else if(n===1)parc.push(k+' — '+cl(c)+' ('+short(cell(k,c)[0].nome)+')')})}));
+ const li=a=>a.length?'<ul class="cob">'+a.map(x=>`<li>${esc(x)}</li>`).join('')+'</ul>':'<span class="empty">Nenhuma.</span>';
+ return `<h2>Modalidades sem cobertura da nossa delegação</h2><div class="cards cobcards"><div class="card bad"><div class="n">${zero.length}</div><div class="l">sem nenhum competidor</div>${li(zero)}</div><div class="card warn"><div class="n">${parc.length}</div><div class="l">com 1 competidor (resta 1 vaga pelo limite de 2)</div>${li(parc)}</div></div>`}
+function resumo(){
+ const people={};ROWS.forEach(r=>{(people[r.nome]??=r)});
+ const byDel={};Object.values(people).forEach(r=>byDel[r.delegacao]=(byDel[r.delegacao]||0)+1);
+ const fut={};ROWS.filter(r=>r.prova==='Futsal').forEach(r=>fut[r.categoria]=(fut[r.categoria]||0)+1);
+ const vol=ROWS.filter(r=>r.prova==='Vôlei').length;
+ const ups=ROWS.filter(isUp);
+ const att=ROWS.filter(r=>r.situacao==='ATENÇÃO'||r.situacao==='PENDENTE').length;
+ const c=(n,l,k='')=>`<div class="card ${k}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+ return `<div class="cards">${c(Object.keys(people).length,'Embaixadores do Rei no departamento')}${Object.entries(byDel).map(([d,n])=>c(n,DEL[d][1])).join('')}</div>
+ <h2>Equipes</h2><div class="cards">${CATS.map(k=>{const n=fut[k]||0;return c(n+' / 5–10','Futsal '+k,n>=5&&n<=10?'ok':'bad')}).join('')}${c(vol+' / 6–12','Vôlei (categoria única Adolescente/Juvenil)',vol>=6&&vol<=12?'ok':'bad')}</div>
+ ${cobertura()}
+ <h2>Competindo acima da própria categoria</h2>
+ <div class="uplist">${ups.length?ups.map(r=>`<div class="card">${chip(r)} <b>${esc(r.nome)}</b> · ${esc(r.categoria)} <span class="up">→</span> ${esc(r.categoria_disputa)} em ${esc(labOf(r))}</div>`).join(''):'<span class="empty">Ninguém.</span>'}</div>
+ <h2>Situação</h2><div class="cards">${c(att,'itens com atenção ou pendentes',att?'bad':'ok')}</div>
+ <p class="empty">O futsal Júnior tem 4 Embaixadores do Rei e o mínimo é 5 (art. 40 §1º); a negociação com o Comitê está em andamento. Passe o mouse sobre um nome para ver detalhes. O ↑ marca quem compete acima da própria categoria.</p>`}
+const TABS=[['resumo','Resumo'],['part','Participantes'],['comp','Por competição'],['er','Por Embaixador do Rei'],['pend','Pendências']];
+const VIEWS={resumo,part:participantes,comp,er:ers,pend};
+function csvText(){
+ const cols=['delegacao','nome','nascimento','categoria','idade_em_11_10_2026','modulo','competicao','sigla','prova','tipo','categoria_disputa','dupla','sobe_categoria','situacao','observacao'];
+ const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+ return '﻿'+cols.join(',')+'\n'+ROWS.filter(filt).map(r=>cols.map(c=>q(r[c])).join(',')).join('\n')+'\n'}
+function say(t){const m=document.getElementById('msg');if(m)m.textContent=t}
+async function baixar(){
+ const name='delegacao_oeer2026.csv',data=csvText();
+ if(PUBLISH){
+  try{const d=await window.claude?.use?.('downloads');
+   if(!d){say('Download indisponível nesta visualização.');return}
+   await d.save({filename:name,data});say('Arquivo enviado para salvar.')}
+  catch(e){say(e&&e.code==='declined'?'Download cancelado.':'Não foi possível baixar o arquivo.')}
+ }else{
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();a.remove();say('Arquivo gerado.')}
+}
+function imprimir(){
+ const v=document.getElementById('view');const keep=state.tab;
+ v.innerHTML=TABS.map(([k,l],i)=>`<section class="${i?'pg':''}"><h2 style="color:#000;font-size:16px">${l}</h2>${VIEWS[k]()}</section>`).join('');
+ const back=()=>{render();window.removeEventListener('afterprint',back)};
+ window.addEventListener('afterprint',back);
+ window.print();
+}
+function render(){
+ document.getElementById('tabs').innerHTML=TABS.map(([k,l])=>`<button aria-pressed="${state.tab===k}" data-t="${k}">${l}</button>`).join('');
+ const f=document.getElementById('filters');
+ f.style.display=state.tab==='resumo'?'none':'flex';
+ f.innerHTML=`<label>Delegação <select id="f-del" data-f="del"><option value="">Todas</option>${Object.entries(DEL).map(([k,v])=>`<option value="${esc(k)}" ${state.del===k?'selected':''}>${v[1]}</option>`).join('')}</select></label>
+  <label>Categoria <select id="f-cat" data-f="cat"><option value="">Todas</option>${CATS.map(c=>`<option ${state.cat===c?'selected':''}>${c}</option>`).join('')}</select></label>
+  <input id="f-q" data-f="q" placeholder="Buscar nome ou prova" value="${esc(state.q)}">`;
+ document.getElementById('view').innerHTML=VIEWS[state.tab]();
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t){state.tab=t.dataset.t;render()}
+ if(e.target.closest('#b-dl'))baixar();if(e.target.closest('#b-pr'))imprimir()});
+document.addEventListener('change',e=>{const f=e.target.dataset.f;if(f&&f!=='q'){state[f]=e.target.value;render()}});
+document.addEventListener('input',e=>{if(e.target.dataset.f==='q'){state.q=e.target.value;const p=e.target.selectionStart;render();const i=document.getElementById('f-q');i.focus();i.setSelectionRange(p,p)}});
+render();
+if(PUBLISH){Promise.resolve(window.claude?.use?.('downloads')).then(d=>{if(!d)document.getElementById('b-dl').hidden=true}).catch(()=>{})}
+'''
+
+def body(publish):
+    btns='<button class="btn" id="b-dl" type="button">Baixar CSV</button>'
+    if not publish: btns+='<button class="btn sec" id="b-pr" type="button">Imprimir relatório</button>'
+    return f'''<div class="wrap">
+<div class="top"><div><h1>II OEER 2026 · Delegação do Departamento</h1>
+<p class="sub">Quixadá-CE · 10 a 12 de outubro de 2026 · limite de 2 Embaixadores do Rei por competição e categoria (art. 13 §1º)</p></div>
+<div class="actions">{btns}<span id="msg" role="status"></span></div></div>
+<nav id="tabs"></nav>
+<div class="legend"><span class="chip js"><i></i>José Saraiva</span><span class="chip w"><i></i>Waldemiro Tymchak</span><span class="chip jb"><i></i>Jeff Brawner</span><span class="chip upc js"><i></i><b class="up">↑</b>Compete acima da categoria</span></div>
+<div class="filters" id="filters"></div>
+<section id="view"></section>
+</div>'''
+
+def build(publish):
+    data=[{k:v for k,v in r.items() if k not in ('texto_original',)} for r in rows]
+    js=JS.replace('__DATA__',json.dumps(data,ensure_ascii=False).replace('</','<\\/')).replace('__PUBLISH__','true' if publish else 'false')
+    title='Delegação II OEER 2026'
+    core=f'<title>{title}</title>\n<style>{CSS}</style>\n{body(publish)}\n<script>{js}</script>\n'
+    if publish: return core
+    return f'<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{core.split("</style>")[0]}</style></head><body>{core.split("</style>")[1]}</body></html>'
+
+open(B+'visualizacao_oeer2026.html','w',encoding='utf-8').write(build(False))
+import os
+os.makedirs('/private/tmp/claude-501/-Users-abnerescocio-Dev-embaixadores-do-rei/2489efff-00ee-4f39-ba6b-f99e629395da/scratchpad/pub',exist_ok=True)
+open('/private/tmp/claude-501/-Users-abnerescocio-Dev-embaixadores-do-rei/2489efff-00ee-4f39-ba6b-f99e629395da/scratchpad/pub/delegacao_oeer2026.html','w',encoding='utf-8').write(build(True))
+print('ok')

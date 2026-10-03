@@ -1,8 +1,8 @@
-﻿delegacao,nome,nascimento,idade_em_11_10_2026,categoria,modulo,competicao,sigla,prova,tipo,categoria_disputa,situacao,papel,dupla,observacao,sugestao,texto_original
-Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Jogos de Salão,,Tênis de Mesa,jogo de salão,Adolescente,OK,Titular,,,,tênis de mesa
-Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Jogos Coletivos,,Futsal,coletiva,Adolescente,OK,Titular,,,,futsal
-Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Atletismo,,Salto em Distância,individual,Adolescente,OK,Titular,,,,atletismo
-Embaixada Waldemiro Tymchak,Francisco Rodrigo Martins da Silva,2014-05-28,12,Adolescente,Esportivo,Jogos de Salão,,Dominó,jogo de salão,Adolescente,OK,Titular,Adolescente · Dupla 1,,,dominó
-Embaixada Waldemiro Tymchak,Francisco Rodrigo Martins da Silva,2014-05-28,12,Adolescente,Esportivo,Jogos Coletivos,,Futsal,coletiva,Adolescente,OK,Titular,,,,futsal
-Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Bíblico,Sempre Embaixador – Biografia do WAH,SER,,escrita,Adolescente,OK,Titular,,"Inscrição nova, não constava na lista original",,
-Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Bíblico,Debate de Versículos com Referência Bíblica,VRB,,não escrita,Adolescente,OK,Titular,,"Inscrição nova, não constava na lista original",,
+﻿delegacao,nome,nascimento,idade_em_11_10_2026,categoria,modulo,competicao,sigla,prova,tipo,categoria_disputa,situacao,papel,dupla,observacao,sugestao,texto_original,sobe_categoria
+Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Jogos de Salão,,Tênis de Mesa,jogo de salão,Adolescente,OK,Titular,,,,tênis de mesa,
+Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Jogos Coletivos,,Futsal,coletiva,Adolescente,OK,Titular,,,,futsal,
+Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Esportivo,Atletismo,,Salto em Distância,individual,Adolescente,OK,Titular,,,,atletismo,
+Embaixada Waldemiro Tymchak,Francisco Rodrigo Martins da Silva,2014-05-28,12,Adolescente,Esportivo,Jogos de Salão,,Dominó,jogo de salão,Adolescente,OK,Titular,Adolescente · Dupla 1,,,dominó,
+Embaixada Waldemiro Tymchak,Francisco Rodrigo Martins da Silva,2014-05-28,12,Adolescente,Esportivo,Jogos Coletivos,,Futsal,coletiva,Adolescente,OK,Titular,,,,futsal,
+Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Bíblico,Sempre Embaixador – Biografia do WAH,SER,,escrita,Adolescente,OK,Titular,,"Inscrição nova, não constava na lista original",,,
+Embaixada Waldemiro Tymchak,Francisco Rai Martins da Silva,2013-04-17,13,Adolescente,Bíblico,Debate de Versículos com Referência Bíblica,VRB,,não escrita,Adolescente,OK,Titular,,"Inscrição nova, não constava na lista original",,,
