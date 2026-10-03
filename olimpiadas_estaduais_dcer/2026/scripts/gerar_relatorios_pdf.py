@@ -224,9 +224,9 @@ RULES={'CGB':'Prova escrita: 20 questões de múltipla escolha, até 20 minutos.
 'Jogos de Salão · Tênis de Mesa':'Levar a própria raquete. Até 3 sets de 11 pontos; vence quem ganha 2 sets. Vitória vale 2 pontos.',
 'Jogos Coletivos · Futsal':'Jogo de 20 min (2 tempos de 10). Entrar em quadra uniformizado e na súmula em até 10 min, senão WO. Cinco faltas tiram o jogador.',
 'Jogos Coletivos · Vôlei':'Até 3 sets; vence quem ganha 2. Uniformizado e na súmula em até 10 min, senão WO. Rodízio só no saque.'}
-def ficha():
-    t=head('Fichas dos Embaixadores do Rei — II OEER 2026')
-    for i,x in enumerate(ORDER):
+def ficha_text(names,title):
+    t=head(title)
+    for i,x in enumerate(names):
         m=meta(x); rs=ER[x]
         if i: t+='#pagebreak()\n'
         t+=f'''#text(size: 8.5pt, fill: gray)[DAER Litoral · II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]
@@ -278,9 +278,29 @@ def ficha():
         t+='#v(6pt)\n'+alerta(False)
         t+='#pagebreak()\n'+f'#text(size: 8.5pt, fill: gray)[DAER Litoral · II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]\n#v(2pt) #text(size: 18pt, weight: "bold")[Checklist da bagagem]\n#v(1pt) #text(size: 11pt)[{esc(x)} · {esc(EMB[m["delegacao"]])}]\n#v(4pt)\n'
         t+=blk('Documentos e saúde',docs)+blk('Para dormir',dorm)+blk('Roupas e higiene',roup)+blk('Para as suas provas',prov)+blk('No dia a dia',extra)
-    open(TMP+'fichas.typ','w',encoding='utf-8').write(t)
+    return t
 
-relatorio(); ficha()
-for n,out in [('relatorio','oeer2026_relatorio_delegacao.pdf'),('fichas','oeer2026_fichas_embaixadores.pdf')]:
-    r=subprocess.run(['typst','compile','--root','/',TMP+n+'.typ',B+out],capture_output=True,text=True)
-    print(n,r.returncode,r.stderr[:1500])
+import unicodedata
+def slug(x):
+    x=unicodedata.normalize('NFKD',x).encode('ascii','ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+','_',x).strip('_')
+def compilar(typ,out):
+    r=subprocess.run(['typst','compile','--root','/',typ,out],capture_output=True,text=True)
+    if r.returncode: print('ERRO',out,r.stderr[:800])
+    return r.returncode
+relatorio()
+open(TMP+'fichas.typ','w',encoding='utf-8').write(ficha_text(ORDER,'Fichas dos Embaixadores do Rei — II OEER 2026'))
+print('relatorio',compilar(TMP+'relatorio.typ',B+'oeer2026_relatorio_delegacao.pdf'))
+print('fichas gerais',compilar(TMP+'fichas.typ',B+'oeer2026_fichas_embaixadores.pdf'))
+DE=B+'fichas_por_embaixada/'; DR=B+'fichas_por_embaixador/'
+os.makedirs(DE,exist_ok=True); os.makedirs(DR,exist_ok=True)
+for f in os.listdir(DE)+os.listdir(DR): pass
+for d,tag in TAG.items():
+    nomes=[x for x in ORDER if meta(x)['delegacao']==d]
+    p=TMP+f'e_{tag}.typ'; open(p,'w',encoding='utf-8').write(ficha_text(nomes,f'Fichas — Embaixada {EMB[d]}'))
+    compilar(p,DE+f"{tag.lower()}_embaixada_{slug(EMB[d])}.pdf")
+for x in ORDER:
+    tag=TAG[meta(x)['delegacao']].lower()
+    p=TMP+f'r_{tag}_{slug(x)}.typ'; open(p,'w',encoding='utf-8').write(ficha_text([x],f'Ficha — {x}'))
+    compilar(p,DR+f"{tag}_{slug(x)}.pdf")
+print(len(os.listdir(DE)),'por embaixada;',len(os.listdir(DR)),'por embaixador')
