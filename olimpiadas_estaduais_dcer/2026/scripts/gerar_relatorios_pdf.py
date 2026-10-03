@@ -46,7 +46,7 @@ def cellm(content,fill=None):
 PRE='''#set document(title: "__TITLE__")
 #set page(paper: "a4", margin: (x: 1.5cm, top: 1.6cm, bottom: 1.8cm), numbering: "1 / 1", number-align: right,
   footer: context [#text(size: 7.5pt, fill: gray)[Delegação do Departamento · II OEER 2026 · Quixadá-CE · posição em 03/10/2026 #h(1fr) #counter(page).display("1 / 1", both: true)]])
-#set text(font: ("Helvetica Neue", "Arial"), size: 9pt, lang: "pt", region: "br")
+#set text(font: ("Helvetica Neue", "Arial", "Apple Color Emoji"), size: 9pt, lang: "pt", region: "br")
 #set par(justify: false, leading: 0.55em)
 #show heading.where(level: 1): it => block(above: 1.1em, below: 0.6em)[#text(size: 13pt, weight: "bold", fill: rgb("#1b3a6b"))[#it.body] #v(-0.45em) #line(length: 100%, stroke: 0.8pt + rgb("#1b3a6b"))]
 #show heading.where(level: 2): it => block(above: 0.9em, below: 0.4em)[#text(size: 10.5pt, weight: "bold")[#it.body]]
@@ -69,6 +69,18 @@ for sec,items in SEC:
 def klabel(k): return f"{k} — {NAMES[k]}" if k in NAMES else k
 def cat_label(c): return c if c!='Única' else 'categoria única'
 
+
+CONTATO='Abner, Coordenador de DAER: (85) 99252-8076'
+def alerta(longo=True):
+    box=lambda inner:f'#block(width: 100%, fill: rgb("#fdecea"), stroke: 1.6pt + rgb("#c00000"), inset: 9pt, radius: 3pt, breakable: false)[{inner}]\n#v(4pt)\n'
+    red=lambda x:f'#text(fill: rgb("#c00000"), weight: "bold")[{x}]'
+    if not longo:
+        return box(red('ERRO NA CORREÇÃO OU NA PROVA? PROCURE O ABNER AGORA.')+f'\\ #text(fill: rgb("#8a0000"))[Se entender que houve erro na correção ou que a organização está errando na execução da prova, procure imediatamente o *Coordenador de DAER Abner: (85) 99252-8076*. O recurso só pode ser aberto em até *3 horas* (art. 46); depois disso, não há mais o que fazer.]')
+    o=box(red('PREENCHA O GABARITO COM ATENÇÃO')+'\\ #text(fill: rgb("#8a0000"))[Nas provas escritas (CGB, CGO, SER e BJ), marque as 20 respostas no gabarito e confira antes de entregar. Escreva nome completo, DCER e categoria antes de começar (art. 21 I). Depois de chamar o dirigente e entregar, *não dá mais para alterar nenhuma resposta* (art. 21 VI).]')
+    o+=box(red('RECURSO: O PRAZO É DE 3 HORAS')+'\\ #text(fill: rgb("#8a0000"))[Contado a partir da prova, da divulgação do resultado ou da devolução da prova corrigida (art. 46, parágrafo único). *Passou o prazo, acabou a chance.* Só o coordenador do DAER pode enviar o recurso.]')
+    o+=box(red('ERROU A CORREÇÃO? A ORGANIZAÇÃO ERROU NA PROVA?')+f'\\ #text(fill: rgb("#8a0000"))[Se você ou seu líder entender que houve *erro na correção* ou que a *organização está errando na execução da prova*, procure imediatamente o *Coordenador de DAER Abner: (85) 99252-8076*. Avise antes de sair do local e anote o horário, para abrirmos o recurso dentro do prazo.]')
+    return o
+
 # ---------- relatório da delegação ----------
 def relatorio():
     t=head('Delegação do Departamento — II OEER 2026')
@@ -83,16 +95,14 @@ def relatorio():
 
 '''
     fut=collections.Counter(r['categoria'] for r in rows if r['prova']=='Futsal'); vol=sum(1 for r in rows if r['prova']=='Vôlei')
-    t+=tbl(['Equipe','Situação','Regra'],''.join([cellm(f'Futsal {c}')+cellm(f'{fut[c]} Embaixadores do Rei'+(' · *abaixo do mínimo*' if fut[c]<5 else ' · ok'))+cellm('5 a 10 por categoria (art. 40 §1º)') for c in CATS]+[cellm('Vôlei (categoria única Adolescente/Juvenil)')+cellm(f'{vol} Embaixadores do Rei · ok')+cellm('6 a 12 (art. 41 §1º)'),cellm('Revezamento 4x100 m (atletismo)')+cellm('4 Embaixadores do Rei · ok')+cellm('exatamente 4 na chamada (art. 32 §4º)'),cellm('Revezamento 4x25 m (natação)')+cellm('4 Embaixadores do Rei · ok')+cellm('equipe de 4')]),widths=('4.6cm','5cm','1fr'))
-    t+='\n_Legenda dos quadros: JS = José Saraiva · WT = Waldemiro Tymchak · JB = Jeff Brawner · ↑ compete acima da própria categoria (arts. 19 e 31)._\n'
     # prazos
     t+='= Prazos e documentos\n'
-    pr=[('Pagamento da inscrição','R$ 140 até 15/09 às 18h; R$ 160 até 02/10 às 18h (prazo final já encerrado). Sem devolução em caso de desistência (art. 7). Levar os comprovantes na chegada (art. 9).'),
+    pr=[('Pagamento da inscrição','R$ 140 até 15/09 às 18h; R$ 160 até 02/10 às 18h (prazo final já encerrado). Sem devolução em caso de desistência (art. 7).'),
         ('Formulário online com os participantes por modalidade','até 04/10/2026. Depois dessa data não há alteração, em nenhuma hipótese (art. 15). Competir sem constar na relação custa 1.000 pontos (art. 49 II b).'),
         ('Necessidade especial / adaptação de prova','informar ao Comitê Organizador até 05/10/2026 (art. 11 §2).'),
-        ('Documento obrigatório','Carteira de Embaixador do Rei emitida pelo DENAER ou pelo DCER. Nenhuma outra identificação é aceita (art. 12).'),
+        ('Documento de identificação','O art. 12 exige a carteira de Embaixador do Rei, mas ela não é necessária nesta edição. Cada participante leva um documento oficial com foto.'),
         ('Hospedagem','a inscrição inclui hospedagem econômica, alimentação e premiação. Cada um leva colchonete e roupa de cama (art. 7 §3 e §4). Aspectos físicos e médicos são responsabilidade da delegação (art. 14).'),
-        ('Chegada às provas escritas','20 minutos antes do horário, com a carteira de ER e caneta azul (art. 20). O Quadro de Horários será divulgado pelo Comitê (art. 13 §2).')]
+        ('Chegada às provas escritas','20 minutos antes do horário, com documento com foto e caneta azul (art. 20, sem a carteira de ER nesta edição). O Quadro de Horários será divulgado pelo Comitê (art. 13 §2).')]
     t+=tbl(['Item','Detalhe'],''.join(cellm('*'+esc(a)+'*')+cellm(esc(b)) for a,b in pr),widths=('5cm','1fr'))
     # participantes
     t+='#pagebreak()\n= Participantes\n'
@@ -100,10 +110,11 @@ def relatorio():
     for i,x in enumerate(ORDER,1):
         m=meta(x); nmod=len(ER[x]); up=any(r['sobe_categoria'] for r in ER[x])
         body+=cellm(str(i))+cellm('*'+esc(x)+'*')+cellm(dt(m['nascimento']))+cellm(f"{m['idade_em_11_10_2026']}")+cellm(esc(m['categoria'])+(' ↑' if up else ''))+cellm(esc(EMB[m['delegacao']]))+cellm(str(nmod))
-    t+=tbl(['Nº','Nome completo','Nascimento','Idade','Categoria','Embaixada','Modal.'],body,widths=('0.8cm','5.6cm','2.2cm','1.1cm','2.3cm','1fr','1.2cm'))
+    t+=tbl(['Nº','Nome completo','Nascimento','Idade','Categoria','Embaixada','Modal.'],body,widths=('0.8cm','6.6cm','2.2cm','1.1cm','2.3cm','1fr','1.2cm'))
     t+='\n_Idade em 11/10/2026, conforme o art. 16. "Modal." = número de modalidades. ↑ = compete acima da própria categoria._\n'
     # quadro por competição
     t+='#pagebreak()\n= Quadro por competição\n'
+    t+='_Legenda: JS = José Saraiva · WT = Waldemiro Tymchak · JB = Jeff Brawner · ↑ compete acima da própria categoria (arts. 19 e 31)._\n'
     for sec,items in SEC:
         if sec=='Jogos Coletivos': continue
         t+=f'== {esc(sec)}\n'
@@ -146,20 +157,13 @@ def relatorio():
     ups=[r for r in rows if r['sobe_categoria']]
     t+='- *Futsal Júnior:* 4 Embaixadores do Rei, e o mínimo é 5 (art. 40 §1º). A delegação negocia com o Comitê Organizador. Sem solução, a equipe Júnior não se forma.\n'
     for r in ups: t+=f'- *{esc(short(r["nome"]))}* ({esc(r["categoria"])}) compete acima da própria categoria no {esc(r["competicao"])}, categoria {esc(r["categoria_disputa"])} (arts. 19 e 31).\n'
-    t+='- *Sem reserva:* vôlei com 12 (máximo), futsal Juvenil com 10 (máximo) e revezamentos com exatamente 4. Se alguém faltar, a equipe pode ficar impedida.\n'
-    t+='- *Dominó:* 2 duplas Juvenil, 1 dupla Adolescente (Davi Lucas da José Saraiva + Francisco Rodrigo da Waldemiro Tymchak) e 1 dupla Júnior (Samuel da José Saraiva + Davi Barroso da Jeff Brawner).\n'
-    t+='- *Francisco Rodrigo (Waldemiro Tymchak):* participa só de modalidades esportivas. Se precisar de adaptação, informar ao Comitê até 05/10 (art. 11 §2).\n'
-    nov=collections.OrderedDict()
-    for x in ORDER:
-        its=[lab(r).split(' · ',1)[-1] if r['modulo']!='Bíblico' else r['sigla'] for r in ER[x] if r['observacao'].startswith('Inscrição nova')]
-        if its: nov.setdefault(EMB[meta(x)['delegacao']],[]).append(f"{short(x)} ({', '.join(its)})")
-    t+='- *Inscrições que não constavam nas listas originais* (confirmar que estão no formulário do art. 15): '+esc('; '.join(f"{e}: "+', '.join(v) for e,v in nov.items()))+'.\n'
     # interpretações
     t+='== Interpretações adotadas (confirmar com o Comitê)\n'
-    for s in ['Revezamento não conta entre as 2 provas coletivas por Embaixador do Rei do art. 13; ocupa a vaga de atletismo ou de natação.','Dominó permite 2 duplas por categoria (4 Embaixadores do Rei).','O limite de 2 representantes por competição (art. 13 §1º) vale por categoria. Nas provas de categoria única (100 m livre, 50 m costas, 1500 m), vale 2 no total.','Esgrima Bíblica: 2 por categoria, apesar do texto do art. 27 II ("um por embaixada"), que se entende como erro de redação.']:
+    for s in ['Revezamento não conta entre as 2 provas coletivas por Embaixador do Rei do art. 13; ocupa a vaga de atletismo ou de natação.','Dominó permite 2 duplas por categoria (4 Embaixadores do Rei).','O limite de 2 representantes por competição (art. 13 §1º) vale por categoria. Nas provas de categoria única (100 m livre, 50 m costas, 1500 m), vale 2 no total.','A carteira de Embaixador do Rei (art. 12) não é exigida nesta edição; vale um documento com foto.','Esgrima Bíblica: 2 por categoria, apesar do texto do art. 27 II ("um por embaixada"), que se entende como erro de redação.']:
         t+=f'- {esc(s)}\n'
     # regulamento
     t+='#pagebreak()\n= Regulamento — o que os líderes precisam saber\n'
+    t+=alerta(True)
     t+=regulamento()
     open(TMP+'relatorio.typ','w',encoding='utf-8').write(t)
 
@@ -169,7 +173,7 @@ def regulamento():
         o=f'== {esc(title)}\n'
         for a,b in items: o+=f'- *{esc(a)}* {esc(b)}\n'
         return o+'\n'
-    s+=sec('Geral',[('Categorias (art. 16):','Júnior 9 a 11 anos, Adolescente 12 a 14, Juvenil 15 a 17. Quem completa 12, 15 ou 18 anos a partir de 12/10/2026 fica na categoria que tinha no dia anterior ao evento.'),
+    s+=sec('Geral',[('Identificação (art. 12):','o regulamento pede a carteira de ER, mas nesta edição ela não é necessária. Levar um documento oficial com foto.'),('Categorias (art. 16):','Júnior 9 a 11 anos, Adolescente 12 a 14, Juvenil 15 a 17. Quem completa 12, 15 ou 18 anos a partir de 12/10/2026 fica na categoria que tinha no dia anterior ao evento.'),
       ('Categoria acima (arts. 19 e 31):','o ER de categoria inferior pode competir em categoria de maior idade; o contrário não é permitido.'),
       ('Limites por ER (art. 13):','até 7 modalidades: 1 prova bíblica escrita, 1 não escrita, 1 jogo de salão, 2 individuais (atletismo e natação) e 2 coletivas. Até 2 representantes por competição individual.'),
       ('Inscrição (arts. 6 e 15):','feita pelo coordenador do DAER; o formulário por modalidade não pode ser alterado depois do prazo.'),
@@ -197,7 +201,7 @@ def regulamento():
     return s
 
 # ---------- fichas ----------
-RULES={'CGB':'Prova escrita: 20 questões de múltipla escolha, até 20 minutos. Chegar 20 min antes, com carteira de ER e caneta azul. Escrever nome completo, DCER e categoria antes de começar. Abaixo de 50% de acertos não pontua.',
+RULES={'CGB':'Prova escrita: 20 questões de múltipla escolha, até 20 minutos. Chegar 20 min antes, com documento com foto e caneta azul. Escrever nome completo, DCER e categoria antes de começar. Abaixo de 50% de acertos não pontua.',
 'CGO':'Prova escrita (mesmas regras do CGB). Conteúdo: Júnior = Manual do Escudeiro; Adolescente = Escudeiro e Arauto; Juvenil = Escudeiro, Arauto e Sênior.',
 'MB':'Prova escrita sem consulta, com folha pautada do DCER. Júnior: completa. Adolescente e Juvenil: super completa (com subdivisões). Atenção: II Samuel (romano), letra maiúscula, ordem e número de capítulos.',
 'SER':'Prova escrita (mesmas regras do CGB) sobre o livro "Sempre Embaixador", versão de fevereiro de 2010.',
@@ -249,16 +253,29 @@ def ficha():
                 nome+=f"\\ Equipe: {esc(', '.join(par))}"
             body+=cellm(nome)+cellm(esc(cd.replace('Única','Única Adol./Juvenil')))+cellm(esc(txt))
         t+=tbl(['Modalidade','Categoria','Regras principais'],body,widths=('5.2cm','2.4cm','1fr'))
-        mats=['Carteira de Embaixador do Rei (obrigatória; nenhuma outra identificação vale)','Colchonete e roupa de cama','Comprovante de pagamento, com o líder da delegação']
-        ks=[r for r in rs]
-        if any(r['tipo']=='escrita' for r in ks): mats.append('Caneta azul, e chegar 20 minutos antes da prova escrita')
-        if any(r['sigla'] in('VRB','PRE') for r in ks): mats.append('Bíblia impressa (Almeida Revista e Atualizada, 1995 de preferência)')
-        if any(r['competicao']=='Atletismo' for r in ks): mats.append('Tênis (sem tênis não corre)')
-        if any(r['competicao']=='Natação' for r in ks): mats.append('Roupa própria de natação e toalha')
-        if any(r['prova']=='Tênis de Mesa' for r in ks): mats.append('Raquete de tênis de mesa')
-        if any(r['prova'] in('Futsal','Vôlei') for r in ks): mats.append('Uniforme da equipe e água')
-        t+='\n= Levar\n'+''.join(f'- {esc(a)}\n' for a in mats)
-        t+='\n= Lembretes\n'+'- Chegar ao local de cada prova antes da chamada: a tolerância é de 10 minutos.\n- O Quadro de Horários é divulgado pelo Comitê Organizador; confira se duas provas coincidem.\n- Recursos: o coordenador do DAER tem 3 horas após a prova para enviar (dcercearense\\@hotmail.com).\n'
+        ks=list(rs)
+        has=lambda f:any(f(r) for r in ks)
+        docs=[('🪪','Documento oficial com foto (RG ou outro)'),('💊','Medicamentos de uso pessoal e cartão do plano de saúde, se tiver')]
+        dorm=[('🛏️','Colchonete'),('🛌','Lençol, cobertor e travesseiro'),('🎒','Mochila ou mala identificada com o nome')]
+        roup=[('👕','Camisas e bermudas para os 3 dias'),('👖','Calça e roupa para o culto'),('🧦','Meias e roupa íntima'),('🧥','Agasalho'),('🩴','Chinelo'),('🚿','Toalha de banho'),('🪥','Escova, pasta, sabonete e desodorante'),('🧴','Protetor solar')]
+        prov=[('📖','Bíblia, de preferência Almeida Revista e Atualizada (1995)')] if True else []
+        if has(lambda r:r['tipo']=='escrita'): prov.append(('🖊️','Caneta azul (leve duas) e chegue 20 min antes'))
+        if has(lambda r:r['sigla']=='PRE'): prov.append(('📝','Esboço do sermão em papel (sem celular)'))
+        if has(lambda r:r['sigla']=='VRB'): prov.append(('📚','Bíblia impressa para conferência (não vale digital)'))
+        if has(lambda r:r['competicao']=='Atletismo'): prov.append(('👟','Tênis (sem tênis não corre)'))
+        if has(lambda r:r['competicao']=='Natação'): prov.append(('🩳','Roupa própria de natação (senão é eliminado)'));prov.append(('🧖','Toalha extra para a piscina'))
+        if has(lambda r:r['prova']=='Tênis de Mesa'): prov.append(('🏓','Raquete de tênis de mesa'))
+        if has(lambda r:r['prova']=='Futsal'): prov.append(('⚽','Uniforme de futsal e tênis de quadra'))
+        if has(lambda r:r['prova']=='Vôlei'): prov.append(('🏐','Uniforme de vôlei e tênis de quadra'))
+        if has(lambda r:r['prova']=='Xadrez'): prov.append(('♟️','Disposição para o relógio de 15 minutos (tabuleiro é do evento)'))
+        extra=[('💧','Garrafa de água'),('🍪','Lanche leve para os intervalos'),('🔌','Carregador do celular')]
+        def blk(titulo,items):
+            g=''.join(f'[#box(width: 10pt, height: 10pt, stroke: 0.8pt + luma(80), baseline: 2pt) #h(6pt) #text(size: 13pt)[{e}] #h(4pt) {esc(tx)}],' for e,tx in items)
+            return f'#v(4pt)\n== {esc(titulo)}\n#set text(size: 10pt)\n#grid(columns: (1fr, 1fr), column-gutter: 12pt, row-gutter: 9pt, {g})\n'
+        t+='\n= Lembretes\n'+'- Chegar ao local de cada prova antes da chamada: a tolerância é de 10 minutos.\n- O Quadro de Horários é divulgado pelo Comitê Organizador; confira se duas provas coincidem.\n- A carteira de Embaixador do Rei não é necessária nesta edição, mas o documento com foto é.\n- Recursos: o coordenador do DAER tem 3 horas após a prova para enviar (dcercearense\\@hotmail.com).\n- No verso desta folha está o checklist da sua bagagem.\n'
+        t+='#v(6pt)\n'+alerta(False)
+        t+='#pagebreak()\n'+f'#text(size: 8.5pt, fill: gray)[II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]\n#v(2pt) #text(size: 18pt, weight: "bold")[Checklist da bagagem]\n#v(1pt) #text(size: 11pt)[{esc(x)} · {esc(EMB[m["delegacao"]])}]\n#v(4pt)\n'
+        t+=blk('Documentos e saúde',docs)+blk('Para dormir',dorm)+blk('Roupas e higiene',roup)+blk('Para as suas provas',prov)+blk('No dia a dia',extra)
     open(TMP+'fichas.typ','w',encoding='utf-8').write(t)
 
 relatorio(); ficha()
