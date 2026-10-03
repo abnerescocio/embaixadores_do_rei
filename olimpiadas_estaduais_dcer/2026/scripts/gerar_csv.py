@@ -189,7 +189,7 @@ def save(path,rs):
 save(SAIDA+'delegacao_jose_saraiva_oeer2026.csv',[r for r in rows if r['delegacao']==D1])
 save(SAIDA+'delegacao_waldemiro_tymchak_oeer2026.csv',[r for r in rows if r['delegacao']==D2])
 save(SAIDA+'delegacao_jeff_brawner_oeer2026.csv',[r for r in rows if r['delegacao']==D3])
-save(SAIDA+'delegacao_departamento_oeer2026.csv',rows)
+save(SAIDA+'delegacao_daer_litoral_oeer2026.csv',rows)
 print(len(rows),dict(fut),vol)
 for kx,v in sorted(pc.items()):
     if v>2:print('LIM',kx,v)

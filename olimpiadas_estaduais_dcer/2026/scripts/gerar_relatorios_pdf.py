@@ -2,7 +2,7 @@ import csv, collections, datetime, subprocess, re, os
 B='/Users/abnerescocio/Dev/embaixadores_do_rei/olimpiadas_estaduais_dcer/2026/saida/'
 TMP='/private/tmp/claude-501/-Users-abnerescocio-Dev-embaixadores-do-rei/2489efff-00ee-4f39-ba6b-f99e629395da/scratchpad/typ/'
 os.makedirs(TMP,exist_ok=True)
-rows=list(csv.DictReader(open(B+'delegacao_departamento_oeer2026.csv',encoding='utf-8-sig')))
+rows=list(csv.DictReader(open(B+'delegacao_daer_litoral_oeer2026.csv',encoding='utf-8-sig')))
 CATS=['Júnior','Adolescente','Juvenil']
 TAG={'Embaixada Pastor José Saraiva':'JS','Embaixada Waldemiro Tymchak':'WT','Embaixada Jeff Brawner':'JB'}
 EMB={'Embaixada Pastor José Saraiva':'Pastor José Saraiva','Embaixada Waldemiro Tymchak':'Waldemiro Tymchak','Embaixada Jeff Brawner':'Jeff Brawner'}
@@ -45,7 +45,7 @@ def cellm(content,fill=None):
 
 PRE='''#set document(title: "__TITLE__")
 #set page(paper: "a4", margin: (x: 1.5cm, top: 1.6cm, bottom: 1.8cm), numbering: "1 / 1", number-align: right,
-  footer: context [#text(size: 7.5pt, fill: gray)[Delegação do Departamento · II OEER 2026 · Quixadá-CE · posição em 03/10/2026 #h(1fr) #counter(page).display("1 / 1", both: true)]])
+  footer: context [#text(size: 7.5pt, fill: gray)[Delegação DAER Litoral · II OEER 2026 · Quixadá-CE · posição em 03/10/2026 #h(1fr) #counter(page).display("1 / 1", both: true)]])
 #set text(font: ("Helvetica Neue", "Arial", "Apple Color Emoji"), size: 9pt, lang: "pt", region: "br")
 #set par(justify: false, leading: 0.55em)
 #show heading.where(level: 1): it => block(above: 1.1em, below: 0.6em)[#text(size: 13pt, weight: "bold", fill: rgb("#1b3a6b"))[#it.body] #v(-0.45em) #line(length: 100%, stroke: 0.8pt + rgb("#1b3a6b"))]
@@ -83,10 +83,10 @@ def alerta(longo=True):
 
 # ---------- relatório da delegação ----------
 def relatorio():
-    t=head('Delegação do Departamento — II OEER 2026')
+    t=head('Delegação DAER Litoral — II OEER 2026')
     n=len(ER); porcat=collections.Counter(meta(x)['categoria'] for x in ER); pordel=collections.Counter(meta(x)['delegacao'] for x in ER)
     t+=f'''#align(center)[#text(size: 9pt, fill: gray)[II Olimpíada Estadual de Embaixadores do Rei · Quixadá-CE · 10 a 12 de outubro de 2026]
-#v(2pt) #text(size: 20pt, weight: "bold")[Delegação do Departamento]
+#v(2pt) #text(size: 20pt, weight: "bold")[Delegação DAER Litoral]
 #v(2pt) #text(size: 11pt)[Relatório para os líderes da delegação · posição em 03/10/2026]]
 #v(6pt)
 = Resumo
@@ -229,7 +229,7 @@ def ficha():
     for i,x in enumerate(ORDER):
         m=meta(x); rs=ER[x]
         if i: t+='#pagebreak()\n'
-        t+=f'''#text(size: 8.5pt, fill: gray)[II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]
+        t+=f'''#text(size: 8.5pt, fill: gray)[DAER Litoral · II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]
 #v(2pt) #text(size: 18pt, weight: "bold")[{esc(x)}]
 #v(4pt)
 '''
@@ -274,7 +274,7 @@ def ficha():
             return f'#v(4pt)\n== {esc(titulo)}\n#set text(size: 10pt)\n#grid(columns: (1fr, 1fr), column-gutter: 12pt, row-gutter: 9pt, {g})\n'
         t+='\n= Lembretes\n'+'- Chegar ao local de cada prova antes da chamada: a tolerância é de 10 minutos.\n- O Quadro de Horários é divulgado pelo Comitê Organizador; confira se duas provas coincidem.\n- A carteira de Embaixador do Rei não é necessária nesta edição, mas o documento com foto é.\n- Recursos: o coordenador do DAER tem 3 horas após a prova para enviar (dcercearense\\@hotmail.com).\n- No verso desta folha está o checklist da sua bagagem.\n'
         t+='#v(6pt)\n'+alerta(False)
-        t+='#pagebreak()\n'+f'#text(size: 8.5pt, fill: gray)[II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]\n#v(2pt) #text(size: 18pt, weight: "bold")[Checklist da bagagem]\n#v(1pt) #text(size: 11pt)[{esc(x)} · {esc(EMB[m["delegacao"]])}]\n#v(4pt)\n'
+        t+='#pagebreak()\n'+f'#text(size: 8.5pt, fill: gray)[DAER Litoral · II OEER 2026 · Quixadá-CE · 10 a 12 de outubro]\n#v(2pt) #text(size: 18pt, weight: "bold")[Checklist da bagagem]\n#v(1pt) #text(size: 11pt)[{esc(x)} · {esc(EMB[m["delegacao"]])}]\n#v(4pt)\n'
         t+=blk('Documentos e saúde',docs)+blk('Para dormir',dorm)+blk('Roupas e higiene',roup)+blk('Para as suas provas',prov)+blk('No dia a dia',extra)
     open(TMP+'fichas.typ','w',encoding='utf-8').write(t)
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delegação II OEER 2026</title>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delegação DAER Litoral</title>
 <style>
 :root{--bg:#f4f6f9;--card:#ffffff;--ink:#1b2333;--mut:#5f6b80;--line:#dde2ea;--soft:#eef1f6;--js:#1f5fd6;--w:#1a7f43;--jb:#b8480f;--warn:#9a5b00;--warnbg:#fdf0cf;--bad:#b3261e;--badbg:#fbe3e1;--ok:#17653a;--okbg:#dcf3e4;--up:#6b3fb5;--upbg:#ece3fa;--btn:#1b2333;--btnink:#ffffff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e131d;--card:#161d2b;--ink:#e6eaf3;--mut:#9aa6bb;--line:#29324a;--soft:#1d2638;--js:#7aa7ff;--w:#58d68d;--jb:#ff9a5c;--warn:#f5c35b;--warnbg:#3a2e0d;--bad:#ff8a80;--badbg:#401816;--ok:#8ae0ad;--okbg:#0f3020;--up:#c3a3ff;--upbg:#2b2047;--btn:#e6eaf3;--btnink:#0e131d;color-scheme:dark}}
@@ -66,7 +66,7 @@ td.k{font-weight:600;min-width:170px}td.k small{display:block;color:var(--mut);f
 @media (max-width:700px){td.k{min-width:120px}th,td{padding:6px}}
 </style></head><body>
 <div class="wrap">
-<div class="top"><div><h1>II OEER 2026 · Delegação do Departamento</h1>
+<div class="top"><div><h1>II OEER 2026 · Delegação DAER Litoral</h1>
 <p class="sub">Quixadá-CE · 10 a 12 de outubro de 2026 · limite de 2 Embaixadores do Rei por competição e categoria (art. 13 §1º)</p></div>
 <div class="actions"><button class="btn" id="b-dl" type="button">Baixar CSV</button><button class="btn sec" id="b-pr" type="button">Imprimir relatório</button><span id="msg" role="status"></span></div></div>
 <nav id="tabs"></nav>
@@ -166,7 +166,7 @@ function resumo(){
  const ups=ROWS.filter(isUp);
  const att=ROWS.filter(r=>r.situacao==='ATENÇÃO'||r.situacao==='PENDENTE').length;
  const c=(n,l,k='')=>`<div class="card ${k}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
- return `<div class="cards">${c(Object.keys(people).length,'Embaixadores do Rei no departamento')}${Object.entries(byDel).map(([d,n])=>c(n,DEL[d][1])).join('')}</div>
+ return `<div class="cards">${c(Object.keys(people).length,'Embaixadores do Rei na delegação DAER Litoral')}${Object.entries(byDel).map(([d,n])=>c(n,DEL[d][1])).join('')}</div>
  <h2>Equipes</h2><div class="cards">${CATS.map(k=>{const n=fut[k]||0;return c(n+' / 5–10','Futsal '+k,n>=5&&n<=10?'ok':'bad')}).join('')}${c(vol+' / 6–12','Vôlei (categoria única Adolescente/Juvenil)',vol>=6&&vol<=12?'ok':'bad')}</div>
  ${cobertura()}
  <h2>Competindo acima da própria categoria</h2>
@@ -181,7 +181,7 @@ function csvText(){
  return '﻿'+cols.join(',')+'\n'+ROWS.filter(filt).map(r=>cols.map(c=>q(r[c])).join(',')).join('\n')+'\n'}
 function say(t){const m=document.getElementById('msg');if(m)m.textContent=t}
 async function baixar(){
- const name='delegacao_oeer2026.csv',data=csvText();
+ const name='delegacao_daer_litoral_oeer2026.csv',data=csvText();
  if(PUBLISH){
   try{const d=await window.claude?.use?.('downloads');
    if(!d){say('Download indisponível nesta visualização.');return}
