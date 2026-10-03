@@ -233,7 +233,7 @@ def ficha():
 #v(2pt) #text(size: 18pt, weight: "bold")[{esc(x)}]
 #v(4pt)
 '''
-        t+=tbl(['Embaixada','Nascimento','Idade','Categoria','Modalidades'],cellm(esc(EMB[m['delegacao']]))+cellm(dt(m['nascimento']))+cellm(f"{m['idade_em_11_10_2026']} anos")+cellm(esc(m['categoria']))+cellm(str(len(rs))),widths=('1fr','2.4cm','1.8cm','2.4cm','2.2cm'),size=9)
+        t+=tbl(['Embaixada','Nascimento','Idade','Categoria','Modalidades'],cellm(esc(EMB[m['delegacao']]))+cellm(dt(m['nascimento']))+cellm(f"{m['idade_em_11_10_2026']} anos")+cellm(esc(m['categoria']))+cellm(str(len(rs))),widths=('1fr','2.6cm','2cm','2.6cm','3cm'),size=9)
         t+='\n= Modalidades\n'
         order={'Bíblico':0,'Jogos de Salão':2,'Atletismo':1,'Natação':1,'Jogos Coletivos':3}
         rs2=sorted(rs,key=lambda r:(order[r['competicao'] if r['competicao'] in order else 'Bíblico'] if r['modulo']!='Bíblico' else 0,lab(r)))
